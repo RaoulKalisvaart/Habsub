@@ -1,0 +1,10 @@
+class habit {
+	boolean mood;
+	String description;
+	String title;
+	Integer every ... days;
+}
+
+class habbitCollection {
+	array of habits;
+}
