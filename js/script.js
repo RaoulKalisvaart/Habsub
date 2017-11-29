@@ -17,7 +17,6 @@ Habit.prototype.setDescription = function(description) { this.description = desc
 Habit.prototype.setDays = function(days) { this.days = days };
 
 var MainModule = ( function () {
-
     var habitCatalog = new HabitCatalog();
 
 	return {
@@ -37,7 +36,20 @@ var MainModule = ( function () {
         }*/
             var newHabit = new Habit(userInput, userDescription, null, null);
             habitCatalog.addHabit(newHabit);
+            MainModule.showElements();
             //console.log(habitCatalog);
+        },
+    
+        showElements: function(){
+            var tempArray = habitCatalog.array;
+            for(var i = 0, max = tempArray.length; i < max; i += 1){
+                var output;
+                output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + " ";
+                var ul = document.getElementById('habitList');
+                var il = document.createElement('li');
+                il.innerHTML = output;
+                ul.appendChild(il);
+            }
         },
 
         editHabit: function (form, habit) {
