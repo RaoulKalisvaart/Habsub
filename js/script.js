@@ -4,6 +4,7 @@ function HabitCatalog() {
 }
 
 HabitCatalog.prototype.addHabit = function(habit) { this.array.push(habit) };
+HabitCatalog.prototype.deleteHabit = function(index) { this.array.splice(index, 1); };
 
 function Habit(name, description, days, mood) {
 	this.name = name;
