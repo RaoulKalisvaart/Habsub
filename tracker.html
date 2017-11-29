@@ -13,85 +13,22 @@
         </nav>
         <img src = "res/Logo.png" alt = "Logo" height = "150">
         <h2>My Tracker</h2>
-        <table border = "1" width="100%">
-            <tr>
-                <th>Habits</th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-                <th>Saturday</th>
-                <th>Sunday</th>
-            </tr>
-            <tr>
-                <td>&nbsp</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>&nbsp</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>&nbsp</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>&nbsp</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-        <div id="statistics">
-            <h4>Habit 1</h4>
-            streak: 5
+        <ul id = "habitList">
+        </ul>
+        <form id = "inputForm">
+            <input type="text" id="userInputHabit" value ="New Habit"><br>
+            <input type="text" id="userInputDesc" value ="Habit Description"><br>
+            When do you want to do this habit?
             <br>
-            longest streak: 12
+            <input type="checkbox" name="DaysOfWeek" value="Monday">Monday
+            <input type="checkbox" name="DaysOfWeek" value="Tuesday">Tuesday
+            <input type="checkbox" name="DaysOfWeek" value="Wednesday">Wednesday
+            <input type="checkbox" name="DaysOfWeek" value="Thursday">Thursday
+            <input type="checkbox" name="DaysOfWeek" value="Friday">Friday
+            <input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday
+            <input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday
             <br>
-            creation date: 3 weeks ago
-        </div>
-        <div id="new-habit">
-            <h4>Create new habit</h4>
-            <form action="newhabit.html">
-                <input type="text" name="Title" value="Name of habit">
-                <br>
-                <input type="text" name="Description" value="Description of habit">
-                <br>
-                When do you want to do this habit?
-                <br>
-                <input type="checkbox" name="DaysOfWeek" value="Monday">Monday
-                <input type="checkbox" name="DaysOfWeek" value="Tuesday">Tuesday
-                <input type="checkbox" name="DaysOfWeek" value="Wednesday">Wednesday
-                <input type="checkbox" name="DaysOfWeek" value="Thursday">Thursday
-                <input type="checkbox" name="DaysOfWeek" value="Friday">Friday
-                <input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday
-                <input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday
-                <br>
-                <input type="submit" value="Sign up">
-            </form>
-        </div>
+        </form>
+        <button id = "habitNew">Add Habit</button>
     </body>
 </html>
