@@ -38,6 +38,19 @@ var MainModule = ( function () {
             var newHabit = new Habit(userInput, userDescription, null, null);
             habitCatalog.addHabit(newHabit);
             console.log(habitCatalog);
+            MainModule.showElements;
+        },
+
+        showElements: function(){
+            var tempArray = habitCatalog.array;
+            for(var i = 0, max = tempArray.length; i < max; i += 1){
+                var output;
+                output = "Habit: " + tempArray[i].name + "; Description: " + habitCatalog.array[i].description + " ";
+                var ul = document.getElementById('habitList');
+                var il = document.createElement('li');
+                il.innerHTML = output;
+                ul.appendChild(il);
+            }
         }
 	}
 
