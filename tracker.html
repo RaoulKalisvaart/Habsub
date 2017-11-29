@@ -16,6 +16,7 @@
         <ul id = "habitList">
         </ul>
         <form id = "inputForm">
+
             <input type="text" id="userInputHabit" placeholder ="New Habit"><br>
             <input type="text" id="userInputDesc" placeholder ="Habit Description"><br>
             When do you want to do this habit?
@@ -30,5 +31,25 @@
             <br>
         </form>
         <button id = "habitNew">Add Habit</button>
+        <form name="edit-habit" action="" onsubmit="return false">
+            <fieldset>
+            <legend>Edit your habit</legend>
+                <input type="text" name="Name" placeholder="Name of habit">
+                <br>
+                <input type="text" name="Description" placeholder="Description of habit">
+                <br>
+                When do you want to do this habit?
+                <br>
+                <label><input type="checkbox" name="DaysOfWeek" value="Monday">Monday</label>
+                <label><input type="checkbox" name="DaysOfWeek" value="Tuesday">Tuesday</label>
+                <label><input type="checkbox" name="DaysOfWeek" value="Wednesday">Wednesday</label>
+                <label><input type="checkbox" name="DaysOfWeek" value="Thursday">Thursday</label>
+                <label><input type="checkbox" name="DaysOfWeek" value="Friday">Friday</label>
+                <label><input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday</label>
+                <label><input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday</label>
+                <br>
+                <input type="submit" value="Sign up" onclick="MainModule.editHabit(this.form)">
+            </fieldset>
+        </form>
     </body>
 </html>
