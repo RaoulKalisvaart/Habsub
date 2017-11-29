@@ -3,7 +3,7 @@ function HabitCatalog() {
 	this.array = [];
 }
 
-HabitCatalog.prototype.addHabit = function(habit) { array.push(habit) };
+HabitCatalog.prototype.addHabit = function(habit) { this.array.push(habit) };
 
 function Habit(name, description, days, mood) {
 	this.name = name;
@@ -36,6 +36,8 @@ var MainModule = ( function () {
                  }
         }*/
             var newHabit = new Habit(userInput, userDescription, null, null);
+            habitCatalog.addHabit(newHabit);
+            console.log(habitCatalog);
         }
 	}
 
