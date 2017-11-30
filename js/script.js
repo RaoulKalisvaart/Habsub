@@ -67,7 +67,6 @@ var MainModule = ( function () {
                 	if(day == 7) { day = 0 }
                 }
 
-                //output += "<label><input></label>\n";
                 var il = document.createElement('li');
                 il.innerHTML = output;
                 ul.appendChild(il);
