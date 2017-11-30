@@ -75,7 +75,7 @@ var MainModule = ( function () {
 
         editHabit: function (form) {
 
-        	habit = habitCatalog.array[toEdit];
+        	var habit = habitCatalog.array[toEdit];
 
 			if(form.Name.value !== "") { habit.setName(form.Name.value); }
 			if(form.Description.value !== "") { habit.setDescription(form.Description.value); }
