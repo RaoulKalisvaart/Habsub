@@ -1,58 +1,56 @@
 <Doctype html>
-<html>
-    <head>
-        <title>Habsub: Tracker</title>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <script type="text/javascript" src="js/script.js"></script>
-    </head>
-    <body>
-        <nav align = "right">
-            <a href="index.html">Home</a> |
-            <a href = "tracker.html">My Tracker</a> |
-            <a href = "FAQ.html">FAQ</a>
-        </nav>
-        <img src = "res/Logo.png" alt = "Logo" height = "150">
-        <h2>My Tracker</h2>
-        <ul id = "habitList">
-        </ul>
-        <form id = "inputForm">
-<<<<<<< HEAD
-
-=======
->>>>>>> c4d7a4993f023b449f47402b86dec846234c9ef7
-            <input type="text" id="userInputHabit" placeholder ="New Habit"><br>
-            <input type="text" id="userInputDesc" placeholder ="Habit Description"><br>
-            When do you want to do this habit?
-            <br>
-            <input type="checkbox" name="DaysOfWeek" value="Monday">Monday
-            <input type="checkbox" name="DaysOfWeek" value="Tuesday">Tuesday
-            <input type="checkbox" name="DaysOfWeek" value="Wednesday">Wednesday
-            <input type="checkbox" name="DaysOfWeek" value="Thursday">Thursday
-            <input type="checkbox" name="DaysOfWeek" value="Friday">Friday
-            <input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday
-            <input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday
-            <br>
-        </form>
-        <button id = "habitNew">Add Habit</button>
-        <form name="edit-habit" action="" onsubmit="return false">
-            <fieldset>
-            <legend>Edit your habit</legend>
-                <input type="text" name="Name" placeholder="Name of habit">
-                <br>
-                <input type="text" name="Description" placeholder="Description of habit">
-                <br>
+    <html>
+        <head>
+            <title>Habsub: Tracker</title>
+            <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script type="text/javascript" src="js/script.js"></script>
+        </head>
+        <body>
+            <nav align = "right">
+                <a href="index.html">Home</a> |
+                <a href = "tracker.html">My Tracker</a> |
+                <a href = "FAQ.html">FAQ</a>
+            </nav>
+            <img src = "res/Logo.png" alt = "Logo" height = "150">
+            <h2>My Tracker</h2>
+            <ul id = "habitList">
+            </ul>
+            <form id = "inputForm" onsubmit="return false">
+                <input type="text" id="userInputHabit" placeholder ="New Habit"><br>
+                <input type="text" id="userInputDesc" placeholder ="Habit Description"><br>
                 When do you want to do this habit?
                 <br>
-                <label><input type="checkbox" name="DaysOfWeek" value="Monday">Monday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Tuesday">Tuesday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Wednesday">Wednesday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Thursday">Thursday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Friday">Friday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday</label>
+                <input type="checkbox" name="DaysOfWeek" value="Monday" onclick >Monday
+                <input type="checkbox" name="DaysOfWeek" value="Tuesday">Tuesday
+                <input type="checkbox" name="DaysOfWeek" value="Wednesday">Wednesday
+                <input type="checkbox" name="DaysOfWeek" value="Thursday">Thursday
+                <input type="checkbox" name="DaysOfWeek" value="Friday">Friday
+                <input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday
+                <input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday
                 <br>
-                <input type="submit" value="Save changes" onclick="MainModule.editHabit(this.form)">
-            </fieldset>
-        </form>
-    </body>
-</html>
+                <input type="radio" name="Mood" value="positive">Positive
+                <input type="radio" name="Mood" value="negative">Negative<br>
+                <input type="submit" value="Add Habit" onclick="MainModule.addElement(this.form)">
+            </form>
+            <form name="edit-habit" action="" onsubmit="return false">
+                <fieldset>
+                <legend>Edit your habit</legend>
+                    <input type="text" name="Name" placeholder="Name of habit">
+                    <br>
+                    <input type="text" name="Description" placeholder="Description of habit">
+                    <br>
+                    When do you want to do this habit?
+                    <br>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Monday">Monday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Tuesday">Tuesday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Wednesday">Wednesday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Thursday">Thursday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Friday">Friday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday</label>
+                    <br>
+                    <input type="submit" value="Save changes" onclick="MainModule.editHabit(this.form)">
+                </fieldset>
+            </form>
+        </body>
+    </html>
