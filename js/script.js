@@ -15,7 +15,7 @@ function Habit(name, description, days, mood) {
 Habit.prototype.setName = function(name) { this.name = name };
 Habit.prototype.setDescription = function(description) { this.description = description }
 Habit.prototype.setDays = function(days) { this.days = days };
-Habit.prototype.setMood = function(mood) {this.mood = mood};
+Habit.prototype.setMood=function(mood) {this.mood = mood};
 
 var MainModule = ( function () {
 
@@ -95,9 +95,7 @@ var MainModule = ( function () {
 				}
 			}
             habit.setDays(days);
-            
             habit.setMood(form.Mood.value);
-
 			MainModule.showElements();
 
 			// FOR DEBUGGING ONLY
