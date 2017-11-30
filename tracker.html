@@ -28,8 +28,8 @@
                 <input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday
                 <input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday
                 <br>
-                <input type="radio" name="Mood" value="positive">Positive
-                <input type="radio" name="Mood" value="negative">Negative<br>
+                <input type="radio" name="Mood" value="Positive">Positive
+                <input type="radio" name="Mood" value="Negative">Negative<br>
                 <input type="submit" value="Add Habit" onclick="MainModule.addElement(this.form)">
             </form>
             <form name="edit-habit" action="" onsubmit="return false">
@@ -49,6 +49,8 @@
                     <label><input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday</label>
                     <label><input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday</label>
                     <br>
+                    <input type="radio" name="Mood" value="Positive">Positive
+                    <input type="radio" name="Mood" value="Negative">Negative<br>
                     <input type="submit" value="Save changes" onclick="MainModule.editHabit(this.form)">
                 </fieldset>
             </form>
