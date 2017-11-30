@@ -24,6 +24,7 @@ var MainModule = ( function () {
 
 	return {
         addElement: function(form){
+
             // var ul = document.getElementById('habitList');
             // var il = document.createElement('li');
             var userInput = document.getElementById('userInputHabit').value
