@@ -67,6 +67,7 @@ var MainModule = ( function () {
     
         showElements: function(){
             var tempArray = habitCatalog.array;
+            // FOR DEBUGGING ONLY
             //console.log(tempArray);
             var ul = document.getElementById('habitList');
 
