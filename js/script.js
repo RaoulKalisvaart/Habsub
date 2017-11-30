@@ -16,6 +16,15 @@ Habit.prototype.setName = function(name) { this.name = name };
 Habit.prototype.setDescription = function(description) { this.description = description }
 Habit.prototype.setDays = function(days) { this.days = days };
 
+$(document).on("click", ".progress", function() {
+	var attr = $(this).attr('style');
+	if (typeof attr !== typeof undefined && attr !== false) {
+		$(this).removeAttr("style");
+	} else {
+		$(this).css("background-color", "green");
+	}
+})
+
 var MainModule = ( function () {
 
     var habitCatalog = new HabitCatalog();
@@ -78,7 +87,7 @@ var MainModule = ( function () {
                 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                 var day = new Date().getDay();
                 for (var j = 0; j < days.length; j++) {
-                	output += "<label><input type=\"checkbox\" name=\"Check\" value=\"" + days[day] + "\">" + days[day] + "</label>"
+                	output += "<label class=\"progress\"><input type=\"checkbox\" name=\"Check\" value=\"" + days[day] + "\">" + days[day] + "</label>"
                 	day++
                 	if(day == 7) { day = 0 }
                 }
