@@ -74,18 +74,6 @@ var MainModule = ( function () {
 			console.log(habit);
 		},
 
-        showElements: function(){
-            var tempArray = habitCatalog.array;
-            for(var i = 0, max = tempArray.length; i < max; i += 1){
-                var output;
-                output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + " ";
-                var ul = document.getElementById('habitList');
-                var il = document.createElement('li');
-                il.innerHTML = output;
-                ul.appendChild(il);
-            }
-        },
-
         deleteHabit: function (habit) {
 			habitCatalog.deleteHabit(habit);
 		},
