@@ -1,4 +1,3 @@
-
 function HabitCatalog() {
 	this.array = [];
 }
@@ -24,7 +23,8 @@ var MainModule = ( function () {
     var toEdit;
 
 	return {
-        addElement: function(){
+        addElement: function(form){
+
             // var ul = document.getElementById('habitList');
             // var il = document.createElement('li');
             var userInput = document.getElementById('userInputHabit').value
@@ -38,7 +38,18 @@ var MainModule = ( function () {
                     habitDays.push(inputs[i].value);
                  }
         }*/
-            var newHabit = new Habit(userInput, userDescription, null, null);
+
+            temp = []
+			for (var i = 0; i < form.DaysOfWeek.length; i++) {
+				if(form.DaysOfWeek[i].checked === true){
+					temp.push(form.DaysOfWeek[i].value);
+				}
+            }
+            
+            console.log(form.Mood);
+            
+            var newHabit = new Habit(userInput, userDescription, temp, null);
+
             habitCatalog.addHabit(newHabit);
             MainModule.showElements();
             console.log(habitCatalog);
@@ -55,7 +66,12 @@ var MainModule = ( function () {
 
             for(var i = 0, max = tempArray.length; i < max; i += 1){
                 var output;
-                output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + " \n";
+                output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + "; Days:";
+                for(var j = 0; j < tempArray[i].days.length; j++)
+                {
+                    output = output + tempArray[i].days[j] + " ";
+                }
+                output += "\n";
                 output += "<button onclick=\"MainModule.deleteHabit(" + i + ")\">delete</button>\n";
                 output += "<button onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
 
@@ -107,6 +123,6 @@ var MainModule = ( function () {
 })();
 
 window.onload = function(){
-    document.getElementById("habitNew").onclick = MainModule.addElement;
+    //document.getElementById("habitNew").onclick = MainModule.addElement;
     //document.getElementById("habitDelete").onclick = deleteElement;
 }
