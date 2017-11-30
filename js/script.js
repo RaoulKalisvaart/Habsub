@@ -58,6 +58,16 @@ var MainModule = ( function () {
                 output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + " \n";
                 output += "<button onclick=\"MainModule.deleteHabit(" + i + ")\">delete</button>\n";
                 output += "<button onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
+
+                var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+                var day = new Date().getDay();
+                for (var i = 0; i < days.length; i++) {
+                	output += "<label><input type=\"checkbox\" name=\"Check\" value=\"" + days[day] + "\">" + days[day] + "</label>"
+                	day--
+                	if(day == 0) { day = 7 }
+                }
+
+                //output += "<label><input></label>\n";
                 var il = document.createElement('li');
                 il.innerHTML = output;
                 ul.appendChild(il);
