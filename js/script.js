@@ -15,6 +15,7 @@ function Habit(name, description, days, mood) {
 Habit.prototype.setName = function(name) { this.name = name };
 Habit.prototype.setDescription = function(description) { this.description = description }
 Habit.prototype.setDays = function(days) { this.days = days };
+Habit.prototype.setMood = function(mood) {this.mood = mood};
 
 var MainModule = ( function () {
 
@@ -46,9 +47,9 @@ var MainModule = ( function () {
 				}
             }
             
-            console.log(form.Mood);
+            var newMood = form.Mood.value;
             
-            var newHabit = new Habit(userInput, userDescription, temp, null);
+            var newHabit = new Habit(userInput, userDescription, temp, newMood);
 
             habitCatalog.addHabit(newHabit);
             MainModule.showElements();
@@ -71,7 +72,7 @@ var MainModule = ( function () {
                 {
                     output = output + tempArray[i].days[j] + " ";
                 }
-                output += "\n";
+                output += "Mood: " + tempArray[i].mood +"\n";
                 output += "<button onclick=\"MainModule.deleteHabit(" + i + ")\">delete</button>\n";
                 output += "<button onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
                 var il = document.createElement('li');
@@ -93,7 +94,9 @@ var MainModule = ( function () {
 					days.push(form.DaysOfWeek[i].value);
 				}
 			}
-			habit.setDays(days);
+            habit.setDays(days);
+            
+            habit.setMood(form.Mood.value);
 
 			MainModule.showElements();
 
