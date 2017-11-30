@@ -4,6 +4,7 @@ function HabitCatalog() {
 }
 
 HabitCatalog.prototype.addHabit = function(habit) { this.array.push(habit) };
+HabitCatalog.prototype.deleteHabit = function(habit) { this.array.splice(this.array.indexOf(habit), 1); };
 
 function Habit(name, description, days, mood) {
 	this.name = name;
@@ -17,6 +18,10 @@ Habit.prototype.setDescription = function(description) { this.description = desc
 Habit.prototype.setDays = function(days) { this.days = days };
 
 var MainModule = ( function () {
+<<<<<<< HEAD
+=======
+	
+>>>>>>> c4d7a4993f023b449f47402b86dec846234c9ef7
     var habitCatalog = new HabitCatalog();
 
 	return {
@@ -36,8 +41,13 @@ var MainModule = ( function () {
         }*/
             var newHabit = new Habit(userInput, userDescription, null, null);
             habitCatalog.addHabit(newHabit);
+<<<<<<< HEAD
             MainModule.showElements();
             //console.log(habitCatalog);
+=======
+            console.log(habitCatalog);
+            MainModule.showElements();
+>>>>>>> c4d7a4993f023b449f47402b86dec846234c9ef7
         },
     
         showElements: function(){
@@ -71,6 +81,25 @@ var MainModule = ( function () {
 			// FOR DEBUGGING ONLY
 			console.log(habit);
 		},
+<<<<<<< HEAD
+=======
+
+        showElements: function(){
+            var tempArray = habitCatalog.array;
+            for(var i = 0, max = tempArray.length; i < max; i += 1){
+                var output;
+                output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + " ";
+                var ul = document.getElementById('habitList');
+                var il = document.createElement('li');
+                il.innerHTML = output;
+                ul.appendChild(il);
+            }
+        },
+
+        deleteHabit: function (habit) {
+			habitCatalog.deleteHabit(habit);
+		},
+>>>>>>> c4d7a4993f023b449f47402b86dec846234c9ef7
 	}
 
 })();
