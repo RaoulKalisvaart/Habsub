@@ -47,7 +47,7 @@ var MainModule = ( function () {
                 if(inputs[i].type === "checkbox" && inputs[i].checked) {
                     habitDays.push(inputs[i].value);
                  }
-        }*/
+        	}*/
 
             temp = []
 			for (var i = 0; i < form.DaysOfWeek.length; i++) {
