@@ -4,7 +4,7 @@ function HabitCatalog() {
 }
 
 HabitCatalog.prototype.addHabit = function(habit) { this.array.push(habit) };
-HabitCatalog.prototype.deleteHabit = function(habit) { this.array.splice(this.array.indexOf(habit), 1); };
+HabitCatalog.prototype.deleteHabit = function(id) { this.array.splice(id, 1); };
 
 function Habit(name, description, days, mood) {
 	this.name = name;
@@ -23,11 +23,11 @@ var MainModule = ( function () {
 
 	return {
         addElement: function(){
-            var ul = document.getElementById('habitList');
-            var il = document.createElement('li');
+            // var ul = document.getElementById('habitList');
+            // var il = document.createElement('li');
             var userInput = document.getElementById('userInputHabit').value
             var userDescription = document.getElementById('userInputDesc').value;
-            var habitDays = [];
+            // var habitDays = [];
 
             //var inputs = document.getElementsByTagName('input').getElementsByTagName("input")
 
@@ -39,25 +39,32 @@ var MainModule = ( function () {
             var newHabit = new Habit(userInput, userDescription, null, null);
             habitCatalog.addHabit(newHabit);
             MainModule.showElements();
-            //console.log(habitCatalog);
+            console.log(habitCatalog);
         },
     
         showElements: function(){
             var tempArray = habitCatalog.array;
+            console.log(tempArray);
+            var ul = document.getElementById('habitList');
+
+            while (ul.firstChild) {
+				ul.removeChild(ul.firstChild);
+			}
+
             for(var i = 0, max = tempArray.length; i < max; i += 1){
                 var output;
-                output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + " ";
-                var ul = document.getElementById('habitList');
+                output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + " \n" + "<button onclick=\"MainModule.deleteHabit(" + i + ")\">delete</button>";
                 var il = document.createElement('li');
                 il.innerHTML = output;
                 ul.appendChild(il);
             }
         },
 
-        editHabit: function (form, habit) {
+        editHabit: function (form, id) {
 
         	// FOR DEBUGGING ONLY
-        	if(habit == null) { habit = new Habit("test", "test description"); }
+        	//if(habit == null) { habit = new Habit("test", "test description"); }
+        	/*else*/ habit = habitCatalog.array[id];
 
 			if(form.Name.value !== "") { habit.setName(form.Name.value); }
 			if(form.Description.value !== "") { habit.setDescription(form.Description.value); }
@@ -74,8 +81,9 @@ var MainModule = ( function () {
 			console.log(habit);
 		},
 
-        deleteHabit: function (habit) {
-			habitCatalog.deleteHabit(habit);
+        deleteHabit: function (id) {
+			habitCatalog.deleteHabit(id);
+			MainModule.showElements();
 		},
 	}
 
