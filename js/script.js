@@ -21,6 +21,8 @@ var MainModule = ( function () {
 
     var habitCatalog = new HabitCatalog();
 
+    var toEdit;
+
 	return {
         addElement: function(){
             // var ul = document.getElementById('habitList');
@@ -44,7 +46,7 @@ var MainModule = ( function () {
     
         showElements: function(){
             var tempArray = habitCatalog.array;
-            console.log(tempArray);
+            //console.log(tempArray);
             var ul = document.getElementById('habitList');
 
             while (ul.firstChild) {
@@ -53,18 +55,18 @@ var MainModule = ( function () {
 
             for(var i = 0, max = tempArray.length; i < max; i += 1){
                 var output;
-                output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + " \n" + "<button onclick=\"MainModule.deleteHabit(" + i + ")\">delete</button>";
+                output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + " \n";
+                output += "<button onclick=\"MainModule.deleteHabit(" + i + ")\">delete</button>\n";
+                output += "<button onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
                 var il = document.createElement('li');
                 il.innerHTML = output;
                 ul.appendChild(il);
             }
         },
 
-        editHabit: function (form, id) {
+        editHabit: function (form) {
 
-        	// FOR DEBUGGING ONLY
-        	//if(habit == null) { habit = new Habit("test", "test description"); }
-        	/*else*/ habit = habitCatalog.array[id];
+        	habit = habitCatalog.array[toEdit];
 
 			if(form.Name.value !== "") { habit.setName(form.Name.value); }
 			if(form.Description.value !== "") { habit.setDescription(form.Description.value); }
@@ -77,14 +79,20 @@ var MainModule = ( function () {
 			}
 			habit.setDays(days);
 
+			MainModule.showElements();
+
 			// FOR DEBUGGING ONLY
-			console.log(habit);
+			//console.log(habit);
 		},
 
         deleteHabit: function (id) {
 			habitCatalog.deleteHabit(id);
 			MainModule.showElements();
 		},
+
+		setToEdit: function (id) {
+			toEdit = id;
+		}
 	}
 
 })();
