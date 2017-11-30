@@ -63,8 +63,8 @@ var MainModule = ( function () {
                 var day = new Date().getDay();
                 for (var i = 0; i < days.length; i++) {
                 	output += "<label><input type=\"checkbox\" name=\"Check\" value=\"" + days[day] + "\">" + days[day] + "</label>"
-                	day--
-                	if(day == 0) { day = 7 }
+                	day++
+                	if(day == 7) { day = 0 }
                 }
 
                 //output += "<label><input></label>\n";
