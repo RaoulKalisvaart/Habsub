@@ -63,17 +63,26 @@ var Habit = ( function (name, description, days, mood) {
 		mood = newMood;
 	}
 
+	function findDate(date){
+		for (var i = 0; i < progress.length; i++) {
+			if(Math.round((progress[i]-date)/(1000*24*60*60)) == 0){
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	function markDone(date) {
 		progress.push(date);
 	}
 
 	function markUndone(date) {
-		var id = progress.map(Number).indexOf(+date);
+		var id = findDate(date);
 		progress.splice(id, 1);
 	}
 
 	function isMarked(date) {
-		return progress.map(Number).indexOf(+date) != -1;
+		return findDate(date) != -1;
 	}
 
 	return {
@@ -148,8 +157,17 @@ var MainModule = ( function () {
                 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                 var day = new Date().getDay() + 1;
                 for (var j = 0; j < days.length; j++) {
-                	output += "<label><input type=\"checkbox\" class=\"progress\" name=\"Check\" value=\"" + i + " " + (6-j) + "\">" + days[day] + "</label>"
-                	day++
+                	output += "<label><input type=\"checkbox\" class=\"progress\" name=\"Check\" value=\"" + i + " " + (6-j) + "\" ";
+
+                	var date = new Date();
+					date.setDate(date.getDate() - (6-j));
+
+                	if(tempArray[i].isMarked(date)) {
+                		output += "checked"
+                	}
+
+                	output += ">" + days[day] + "</label>";
+                	day++;
                 	if(day == 7) { day = 0 }
                 }
 
