@@ -1,21 +1,102 @@
-function HabitCatalog() {
-	this.array = [];
-}
+// function HabitCatalog() {
+// 	this.array = [];
+// }
 
-HabitCatalog.prototype.addHabit = function(habit) { this.array.push(habit) };
-HabitCatalog.prototype.deleteHabit = function(id) { this.array.splice(id, 1); };
+// HabitCatalog.prototype.addHabit = function(habit) { this.array.push(habit) };
+// HabitCatalog.prototype.deleteHabit = function(id) { this.array.splice(id, 1); };
 
-function Habit(name, description, days, mood) {
-	this.name = name;
-	this.description = description;
-	this.days = days;
-	this.mood = mood;
-}
+var habitCatalog = ( function () {
+	
+	var array = [];
 
-Habit.prototype.setName = function(name) { this.name = name };
-Habit.prototype.setDescription = function(description) { this.description = description }
-Habit.prototype.setDays = function(days) { this.days = days };
-Habit.prototype.setMood=function(mood) {this.mood = mood};
+	function addHabit(habit) {
+		array.push(habit);
+	}
+
+	function deleteHabit(id) {
+		array.splice(id, 1);
+	}
+
+	function getHabits() {
+		return array;
+	}
+
+	function getHabitByID(id) {
+		return array[id];
+	}
+
+	return {
+		addHabit: addHabit,
+		deleteHabit: deleteHabit,
+		getHabits: getHabits,
+		getHabitByID: getHabitByID
+	}
+
+})();
+
+// function Habit(name, description, days, mood) {
+// 	this.name = name;
+// 	this.description = description;
+// 	this.days = days;
+// 	this.mood = mood;
+// }
+
+// Habit.prototype.setName = function(name) { this.name = name };
+// Habit.prototype.setDescription = function(description) { this.description = description }
+// Habit.prototype.setDays = function(days) { this.days = days };
+// Habit.prototype.setMood=function(mood) {this.mood = mood};
+
+var Habit = ( function (name, description, days, mood) {
+	
+	// var name = name;
+	// var description = description;
+	// var days = days;
+	// var mood = mood;
+
+	function getName() {
+		return name;
+	}
+
+	function setName(newName) {
+		name = newName;
+	}
+
+	function getDescription() {
+		return description;
+	}
+
+	function setDescription(newDesc) {
+		description = newDesc;
+	}
+
+	function getDays() {
+		return days;
+	}
+
+	function setDays(newDays) {
+		days = newDays;
+	}
+
+	function getMood() {
+		return mood;
+	}
+
+	function setMood(newMood) {
+		mood = newMood;
+	}
+
+	return {
+		getName: getName,
+		setName: setName,
+		getDescription: getDescription,
+		setDescription: setDescription,
+		getDays: getDays,
+		setDays: setDays,
+		getMood: getMood,
+		setMood: setMood
+	}
+
+});
 
 $(document).on("click", ".progress", function() {
 	var attr = $(this).attr('style');
@@ -27,8 +108,6 @@ $(document).on("click", ".progress", function() {
 })
 
 var MainModule = ( function () {
-
-    var habitCatalog = new HabitCatalog();
 
     var toEdit;
 
@@ -66,7 +145,7 @@ var MainModule = ( function () {
         },
     
         showElements: function(){
-            var tempArray = habitCatalog.array;
+            var tempArray = habitCatalog.getHabits();
             // FOR DEBUGGING ONLY
             //console.log(tempArray);
             var ul = document.getElementById('habitList');
@@ -77,12 +156,12 @@ var MainModule = ( function () {
 
             for(var i = 0, max = tempArray.length; i < max; i += 1){
                 var output;
-                output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + "; Days:";
-                for(var j = 0; j < tempArray[i].days.length; j++)
+                output = "Habit: " + tempArray[i].getName() + "; Description: " + tempArray[i].getDescription() + "; Days:";
+                for(var j = 0; j < tempArray[i].getDays().length; j++)
                 {
-                    output = output + tempArray[i].days[j] + " ";
+                    output = output + tempArray[i].getDays()[j] + " ";
                 }
-                output += "Mood: " + tempArray[i].mood +"\n";
+                output += "Mood: " + tempArray[i].getMood() +"\n";
                 output += "<button onclick=\"MainModule.deleteHabit(" + i + ")\">delete</button>\n";
                 output += "<button onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
 
@@ -102,7 +181,7 @@ var MainModule = ( function () {
 
         editHabit: function (form) {
 
-        	var habit = habitCatalog.array[toEdit];
+        	var habit = habitCatalog.getHabitByID(toEdit);
 
 			if(form.Name.value !== "") { habit.setName(form.Name.value); }
 			if(form.Description.value !== "") { habit.setDescription(form.Description.value); }
@@ -132,8 +211,3 @@ var MainModule = ( function () {
 	}
 
 })();
-
-window.onload = function(){
-    //document.getElementById("habitNew").onclick = MainModule.addElement;
-    //document.getElementById("habitDelete").onclick = deleteElement;
-}
