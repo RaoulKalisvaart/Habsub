@@ -48,10 +48,7 @@ var habitCatalog = ( function () {
 
 var Habit = ( function (name, description, days, mood) {
 	
-	// var name = name;
-	// var description = description;
-	// var days = days;
-	// var mood = mood;
+	var progress = []
 
 	function getName() {
 		return name;
@@ -85,6 +82,19 @@ var Habit = ( function (name, description, days, mood) {
 		mood = newMood;
 	}
 
+	function markDone(date) {
+		progress.push(date);
+	}
+
+	function markUndone(date) {
+		var id = progress.map(Number).indexOf(+date);
+		progress.splice(id, 1);
+	}
+
+	function isMarked(date) {
+		return progress.map(Number).indexOf(+date) != -1;
+	}
+
 	return {
 		getName: getName,
 		setName: setName,
@@ -93,7 +103,10 @@ var Habit = ( function (name, description, days, mood) {
 		getDays: getDays,
 		setDays: setDays,
 		getMood: getMood,
-		setMood: setMood
+		setMood: setMood,
+		markDone: markDone,
+		markUndone: markUndone,
+		isMarked: isMarked
 	}
 
 });
@@ -166,9 +179,9 @@ var MainModule = ( function () {
                 output += "<button onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
 
                 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-                var day = new Date().getDay();
+                var day = new Date().getDay() + 1;
                 for (var j = 0; j < days.length; j++) {
-                	output += "<label class=\"progress\"><input type=\"checkbox\" name=\"Check\" value=\"" + days[day] + "\">" + days[day] + "</label>"
+                	output += "<label><input type=\"checkbox\" class=\"progress\" name=\"Check\" value=\"" + i + " " + (6-j) + "\">" + days[day] + "</label>"
                 	day++
                 	if(day == 7) { day = 0 }
                 }
@@ -207,7 +220,29 @@ var MainModule = ( function () {
 
 		setToEdit: function (id) {
 			toEdit = id;
+		},
+
+		changeProgress: function (e) {
+
+			var values = e.val().split(" ");
+
+			habit = habitCatalog.getHabitByID(values[0]);
+			var date = new Date();
+			date.setDate(date.getDate() - values[1]);
+
+			if(e.is(":checked")) {
+				habit.markDone(date);
+			} else {
+				habit.markUndone(date);
+			}
+
 		}
 	}
 
 })();
+
+$(document).ready(function(){
+    $(document).on('change', 'input.progress', function() {
+    	MainModule.changeProgress($(this))
+    });
+});
