@@ -1,10 +1,3 @@
-// function HabitCatalog() {
-// 	this.array = [];
-// }
-
-// HabitCatalog.prototype.addHabit = function(habit) { this.array.push(habit) };
-// HabitCatalog.prototype.deleteHabit = function(id) { this.array.splice(id, 1); };
-
 var habitCatalog = ( function () {
 	
 	var array = [];
@@ -34,24 +27,9 @@ var habitCatalog = ( function () {
 
 })();
 
-// function Habit(name, description, days, mood) {
-// 	this.name = name;
-// 	this.description = description;
-// 	this.days = days;
-// 	this.mood = mood;
-// }
-
-// Habit.prototype.setName = function(name) { this.name = name };
-// Habit.prototype.setDescription = function(description) { this.description = description }
-// Habit.prototype.setDays = function(days) { this.days = days };
-// Habit.prototype.setMood=function(mood) {this.mood = mood};
-
 var Habit = ( function (name, description, days, mood) {
 	
-	// var name = name;
-	// var description = description;
-	// var days = days;
-	// var mood = mood;
+	var progress = []
 
 	function getName() {
 		return name;
@@ -85,6 +63,19 @@ var Habit = ( function (name, description, days, mood) {
 		mood = newMood;
 	}
 
+	function markDone(date) {
+		progress.push(date);
+	}
+
+	function markUndone(date) {
+		var id = progress.map(Number).indexOf(+date);
+		progress.splice(id, 1);
+	}
+
+	function isMarked(date) {
+		return progress.map(Number).indexOf(+date) != -1;
+	}
+
 	return {
 		getName: getName,
 		setName: setName,
@@ -93,7 +84,10 @@ var Habit = ( function (name, description, days, mood) {
 		getDays: getDays,
 		setDays: setDays,
 		getMood: getMood,
-		setMood: setMood
+		setMood: setMood,
+		markDone: markDone,
+		markUndone: markUndone,
+		isMarked: isMarked
 	}
 
 });
@@ -114,19 +108,8 @@ var MainModule = ( function () {
 	return {
         addElement: function(form){
 
-            // var ul = document.getElementById('habitList');
-            // var il = document.createElement('li');
             var userInput = document.getElementById('userInputHabit').value
             var userDescription = document.getElementById('userInputDesc').value;
-            // var habitDays = [];
-
-            //var inputs = document.getElementsByTagName('input').getElementsByTagName("input")
-
-           /* for(var i = 0, max = inputs.length; i < max; i+= 1){
-                if(inputs[i].type === "checkbox" && inputs[i].checked) {
-                    habitDays.push(inputs[i].value);
-                 }
-        	}*/
 
             temp = []
 			for (var i = 0; i < form.DaysOfWeek.length; i++) {
@@ -141,13 +124,10 @@ var MainModule = ( function () {
 
             habitCatalog.addHabit(newHabit);
             MainModule.showElements();
-            console.log(habitCatalog);
         },
     
         showElements: function(){
             var tempArray = habitCatalog.getHabits();
-            // FOR DEBUGGING ONLY
-            //console.log(tempArray);
             var ul = document.getElementById('habitList');
 
             while (ul.firstChild) {
@@ -166,9 +146,9 @@ var MainModule = ( function () {
                 output += "<button onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
 
                 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-                var day = new Date().getDay();
+                var day = new Date().getDay() + 1;
                 for (var j = 0; j < days.length; j++) {
-                	output += "<label class=\"progress\"><input type=\"checkbox\" name=\"Check\" value=\"" + days[day] + "\">" + days[day] + "</label>"
+                	output += "<label><input type=\"checkbox\" class=\"progress\" name=\"Check\" value=\"" + i + " " + (6-j) + "\">" + days[day] + "</label>"
                 	day++
                 	if(day == 7) { day = 0 }
                 }
@@ -195,9 +175,7 @@ var MainModule = ( function () {
             habit.setDays(days);
             habit.setMood(form.Mood.value);
 			MainModule.showElements();
-
-			// FOR DEBUGGING ONLY
-			//console.log(habit);
+			
 		},
 
         deleteHabit: function (id) {
@@ -207,7 +185,29 @@ var MainModule = ( function () {
 
 		setToEdit: function (id) {
 			toEdit = id;
+		},
+
+		changeProgress: function (e) {
+
+			var values = e.val().split(" ");
+
+			habit = habitCatalog.getHabitByID(values[0]);
+			var date = new Date();
+			date.setDate(date.getDate() - values[1]);
+
+			if(e.is(":checked")) {
+				habit.markDone(date);
+			} else {
+				habit.markUndone(date);
+			}
+
 		}
 	}
 
 })();
+
+$(document).ready(function(){
+    $(document).on('change', 'input.progress', function() {
+    	MainModule.changeProgress($(this))
+    });
+});
