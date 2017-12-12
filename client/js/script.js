@@ -141,7 +141,17 @@ var MainModule = ( function () {
 
             habitCatalog.addHabit(newHabit);
             MainModule.showElements();
-            console.log(habitCatalog);
+			console.log(habitCatalog);
+
+			var obj ={
+				table: []
+			};
+
+			obj.table.push("test 5 keer");
+
+			var json = JSON.stringify(obj);
+			fs.writeFile('server.js', json, 'utf8', callback);
+
         },
     
         showElements: function(){
