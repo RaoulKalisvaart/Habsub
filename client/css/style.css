@@ -1,0 +1,89 @@
+* {
+	box-sizing: border-box;
+	font-family: 'Nunito Sans', sans-serif;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body nav {
+	position: absolute;
+	right: 0em;
+	top: 0em;
+	padding: 1em;
+}
+
+#header {
+	width: 100%;
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+}
+
+#logo {
+	position: relative;
+	left: 0em;
+	padding: .125em 1em;
+}
+
+.columns {
+	display: flex;
+    align-items: center;
+}
+
+.columns .column {
+	flex: 1;
+}
+
+.columns div#signup {
+	text-align: center;
+}
+
+div#signup div.inner-column{
+	margin: auto;
+	max-width: 35em;
+}
+
+div#signup p#or {
+	width: 95%; 
+	text-align: center; 
+	border-bottom: 1px solid #000; 
+	line-height: 0.1em;
+	margin: 1.5em auto 1.5em;
+	font-size: 1.3em;
+}
+
+div#signup p#or span {
+	background:#fff; 
+    padding:0 10px; 
+}
+
+div#signup input, div#signup button {
+	width: 95%;
+	text-align: center;
+	font-size: 1.2em;
+}
+
+div#signup h3 {
+	font-size: 2.5em;
+}
+
+div#signup input[type=submit], div#signup button {
+	background-color: #edaa64;
+	border-color: black;
+	border-width: 0.11em;
+	transition: background-color .5s;
+}
+
+div#signup input[type=submit]:hover, div#signup button:hover {
+	background-color: #ed6423;
+}
+
+div#signup input[type=submit]:active, div#signup button:active {
+	background-color: #ed1414;
+	transition: none;
+}
+
+.columns div#info {
+	text-align: center;
+}
