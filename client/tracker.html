@@ -20,7 +20,7 @@
                 <input type="text" id="userInputDesc" placeholder ="Habit Description"><br>
                 When do you want to do this habit?
                 <br>
-                <input type="checkbox" name="DaysOfWeek" value="Monday" onclick >Monday
+                <input type="checkbox" name="DaysOfWeek" value="Monday">Monday
                 <input type="checkbox" name="DaysOfWeek" value="Tuesday">Tuesday
                 <input type="checkbox" name="DaysOfWeek" value="Wednesday">Wednesday
                 <input type="checkbox" name="DaysOfWeek" value="Thursday">Thursday
@@ -32,7 +32,7 @@
                 <input type="radio" name="Mood" value="Negative">Negative<br>
                 <input type="submit" value="Add Habit" onclick="MainModule.addElement(this.form)">
             </form>
-            <form name="edit-habit" action="" onsubmit="return false">
+            <form id="edit-habit" action="" onsubmit="return false">
                 <fieldset>
                 <legend>Edit your habit</legend>
                     <input type="text" name="Name" placeholder="Name of habit">

@@ -38,7 +38,9 @@ class HabitCatalog {
 	}
 
 	getHabitByID(id) {
-		return this.array[id];
+		return this.array[this.array.findIndex(function (e) {
+			return e.id == id;
+		})];
 	}
 
 }
@@ -191,6 +193,28 @@ var MainModule = (function () {
 		},
 
 		setToEdit: function (id) {
+			var editForm = document.getElementById("edit-habit");
+			var editHabit = habitCatalog.getHabitByID(id);
+
+			editForm.elements["Name"].value = editHabit.name;
+			editForm.elements["Description"].value = editHabit.description;
+
+			var checkboxes = editForm.elements["DaysOfWeek"];
+			for(i = 0; i < checkboxes.length; i++){
+				if(editHabit.days.indexOf(checkboxes[i].value) !== -1) {
+					checkboxes[i].checked = true;
+				} else {
+					checkboxes[i].checked = false;
+				}
+			}
+
+			var moods = editForm.elements["Mood"];
+			if(editHabit.mood == "Positive") {
+				moods[0].checked = true;
+			} else {
+				moods[1].checked = true;
+			}
+
 			toEdit = id;
 		},
 

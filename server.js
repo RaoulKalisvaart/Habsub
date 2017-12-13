@@ -14,7 +14,7 @@ var h1 = {
     name: "Voetballen",
     description: "Met je voet tegen een bal trappen",
     days: "Monday, Sunday",
-    mood: "positive"
+    mood: "Positive"
 };
 
 var h2 = {
@@ -22,7 +22,7 @@ var h2 = {
     name: "Werken",
     description: "Bij de Jumbo",
     days: "Saturday",
-    mood: "positive"
+    mood: "Positive"
 };
 
 habits.push(h1);
