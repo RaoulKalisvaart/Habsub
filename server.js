@@ -49,8 +49,8 @@ app.get("/addhabit", function (req, res) {
 
         habits.push(newObj);
         console.log("Added ");
-        res.end("Habit added succesfully ");
-        
+        res.end(newObj.id.toString());
+
     } else {
         res.status(400);
         res.end("Error: wrong input");
