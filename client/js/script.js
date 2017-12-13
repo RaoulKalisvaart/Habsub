@@ -184,6 +184,13 @@ var MainModule = (function () {
 			}
 			habit.days = days;
 			habit.mood = form.Mood.value;
+
+			$.get("/edithabit?name=" + habit.name +
+				"&description=" + habit.description +
+				"&days=" + habit.days +
+				"&mood=" + habit.mood +
+				"&id=" + habit.id
+			);
 			UI.showElements(habitCatalog.getHabits());
 
 		},
@@ -200,8 +207,8 @@ var MainModule = (function () {
 			editForm.elements["Description"].value = editHabit.description;
 
 			var checkboxes = editForm.elements["DaysOfWeek"];
-			for(i = 0; i < checkboxes.length; i++){
-				if(editHabit.days.indexOf(checkboxes[i].value) !== -1) {
+			for (i = 0; i < checkboxes.length; i++) {
+				if (editHabit.days.indexOf(checkboxes[i].value) !== -1) {
 					checkboxes[i].checked = true;
 				} else {
 					checkboxes[i].checked = false;
@@ -209,7 +216,7 @@ var MainModule = (function () {
 			}
 
 			var moods = editForm.elements["Mood"];
-			if(editHabit.mood == "Positive") {
+			if (editHabit.mood == "Positive") {
 				moods[0].checked = true;
 			} else {
 				moods[1].checked = true;
