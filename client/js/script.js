@@ -133,6 +133,11 @@ var MainModule = ( function () {
 
             habitCatalog.addHabit(newHabit);
             MainModule.showElements();
+
+            if(!$(form).hasClass("hidden")) {
+				$(form).addClass("hidden");
+			}
+
         },
     
         showElements: function(){
@@ -152,7 +157,7 @@ var MainModule = ( function () {
                 }
                 output += "Mood: " + tempArray[i].getMood() +"\n";
                 output += "<button onclick=\"MainModule.deleteHabit(" + i + ")\">delete</button>\n";
-                output += "<button onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
+                output += "<button class=\"editButton\" onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
 
                 var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
                 var day = new Date().getDay() + 1;
@@ -193,6 +198,10 @@ var MainModule = ( function () {
             habit.setDays(days);
             habit.setMood(form.Mood.value);
 			MainModule.showElements();
+
+			if(!$(form).hasClass("hidden")) {
+				$(form).addClass("hidden");
+			}
 			
 		},
 
@@ -228,4 +237,14 @@ $(document).ready(function(){
     $(document).on('change', 'input.progress', function() {
     	MainModule.changeProgress($(this))
     });
+    $(document).on('click', 'button.editButton', function() {
+    	if($("form#edit-habit").hasClass("hidden")) {
+			$("form#edit-habit").removeClass("hidden");
+		}
+    })
+    $(document).on('click', 'button#addHabit', function() {
+    	if($("form#inputForm").hasClass("hidden")) {
+			$("form#inputForm").removeClass("hidden");
+		}
+    })
 });

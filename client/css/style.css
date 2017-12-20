@@ -18,6 +18,7 @@ body nav {
 #header {
 	width: 100%;
 	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	margin-bottom: 2em;
 }
 
 #logo {
@@ -33,6 +34,19 @@ body nav {
 
 .columns .column {
 	flex: 1;
+}
+
+.column h1 {
+	position: relative;
+	animation-name: jumping;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes jumping {
+    from   {bottom:0em;}
+    to     {bottom:1em;}
 }
 
 .columns div#signup {
@@ -86,4 +100,17 @@ div#signup input[type=submit]:active, div#signup button:active {
 
 .columns div#info {
 	text-align: center;
+}
+
+.hidden {
+	display: none;
+}
+
+form#inputForm, form#edit-habit {
+	width: 50%;
+
+}
+
+form#edit-habit {
+
 }
