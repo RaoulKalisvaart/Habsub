@@ -16,6 +16,7 @@
                 </nav>
             </div>
             <h2 id="myTracker">My Tracker</h2>
+            <h3 id="streak">My streak:</h3>
             <table id="habits">
                 <tr>
                     <th>Habit</th>
@@ -68,7 +69,7 @@
                 <br>
                 <input type="radio" name="Mood" value="Positive">Positive
                 <input type="radio" name="Mood" value="Negative">Negative<br>
-                <input type="submit" value="Save changes" onclick="MainModule.editHabit(this.form)">
+                <input id="editButton" type="submit" value="Save changes" onclick="MainModule.editHabit(this.form)">
             </form>
         </body>
     </html>

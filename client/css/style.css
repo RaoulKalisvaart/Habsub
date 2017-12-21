@@ -121,7 +121,7 @@ form#edit-habit {
 	padding: 40px 30px;
 	background-color: #eee;
 	border-radius: 4px;
-	margin: auto;
+	margin-top: auto;
 	position: relative;
 	right: 50px;
   }
@@ -132,13 +132,16 @@ form#edit-habit {
 
 #habits{
 	border-collapse: collapse;
-	width: 100%;
+	width: 95%;
+	margin: 30px;
 }
 
 #habits td, #habits th{
 	border: 1px solid #ddd;
 	padding: 8px;
 	text-align: center;
+	padding-right: 10px;
+	margin: 15px;
 }
 
 #habits th {
@@ -203,17 +206,27 @@ form#edit-habit {
 }
 
 
- #inputForm {
+ #inputForm{
 	margin: auto;
 	position: relative;
 	width: 450px;
-	height: 200px;
+	height: 230px;
 	text-align: center;
 	background:#bbf1b0;
 	border-radius: 20px;
  }
 
- #addButton{
+ #edit-habit{
+	margin: auto;
+	position: relative;
+	width: 450px;
+	height: 230px;
+	text-align: center;
+	background:#bbf1b0;
+	border-radius: 20px;
+ }
+
+ #addButton, #editButton{
 	background-color: rgb(110, 184, 110);
 	border: 1px solid white;
 	color: white;
@@ -225,6 +238,12 @@ form#edit-habit {
 	border-radius: 40px;
  }
 
+ #inputForm input, div#signup button, #edit-habit input {
+	margin-top: 10px;
+	font-size: 1.2em;
+}
+ 
+
  #userInputHabit userInputDesc{
 	 
  }
@@ -232,4 +251,8 @@ form#edit-habit {
  input:invalid + label::after{
 	content: "*";
 	color: rgba(0,100,0,0.7);
+}
+
+#streak{
+	float:clear;
 }
