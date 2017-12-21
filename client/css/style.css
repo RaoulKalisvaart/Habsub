@@ -225,3 +225,11 @@ form#edit-habit {
 	border-radius: 40px;
  }
 
+ #userInputHabit userInputDesc{
+	 
+ }
+
+ input:invalid + label::after{
+	content: "*";
+	color: rgba(0,100,0,0.7);
+}
