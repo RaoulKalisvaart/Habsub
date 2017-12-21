@@ -1,7 +1,13 @@
 class HabitCatalog {
 
 	constructor() {
+		this.fetchHabits();
+	}
+
+	fetchHabits(callback) {
 		var tmpArray = [];
+
+		var that = this;
 
 		$.get("/habits", function (data) {
 			for (var i = 0; i < data.length; i++) {
@@ -9,8 +15,10 @@ class HabitCatalog {
 				toAdd.id = data[i].id;
 				tmpArray.push(toAdd);
 			}
+
+			that.array = tmpArray;
+			typeof callback === 'function' && callback();
 		});
-		this.array = tmpArray;
 	}
 
 	addHabit(habit) {
@@ -229,7 +237,15 @@ var MainModule = (function () {
 		},
 
 		initialShow: function () {
+			console.log(habitCatalog.getHabits());
 			UI.showElements(habitCatalog.getHabits());
+		},
+
+		updateCatalog: function () {
+			habitCatalog.fetchHabits(function() {
+				console.log(habitCatalog.getHabits());
+				UI.showElements(habitCatalog.getHabits());
+			});
 		}
 	}
 
@@ -240,4 +256,7 @@ $(document).ready(function () {
 	$(document).on('change', 'input.progress', function () {
 		MainModule.changeProgress($(this))
 	});
+	window.setInterval(function(){
+	  MainModule.updateCatalog();
+	}, 5000);
 });
