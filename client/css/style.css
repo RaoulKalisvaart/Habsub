@@ -1,0 +1,258 @@
+* {
+	box-sizing: border-box;
+	font-family: 'Nunito Sans', sans-serif;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body nav {
+	position: absolute;
+	right: 0em;
+	top: 0em;
+	padding: 1em;
+}
+
+#header {
+	width: 100%;
+	box-shadow: 0 0 20px rgba(0,0,0,0.2);
+	margin-bottom: 2em;
+}
+
+#logo {
+	position: relative;
+	left: 0em;
+	padding: .125em 1em;
+}
+
+.columns {
+	display: flex;
+	align-items: center;
+}
+
+.columns .column {
+	flex: 1;
+}
+
+.column h1 {
+	position: relative;
+	animation-name: jumping;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes jumping {
+    from   {bottom:0em;}
+    to     {bottom:1em;}
+}
+
+.columns div#signup {
+	text-align: center;
+}
+
+div#signup div.inner-column{
+	margin: auto;
+	max-width: 35em;
+}
+
+div#signup p#or {
+	width: 95%; 
+	text-align: center; 
+	border-bottom: 1px solid #000; 
+	line-height: 0.1em;
+	margin: 1.5em auto 1.5em;
+	font-size: 1.3em;
+}
+
+div#signup p#or span {
+	background:#fff; 
+    padding:0 10px; 
+}
+
+div#signup input, div#signup button {
+	width: 95%;
+	text-align: center;
+	font-size: 1.2em;
+}
+
+div#signup h3 {
+	font-size: 2.5em;
+}
+
+div#signup input[type=submit], div#signup button {
+	background-color: #faa54a;
+	border-color: black;
+	border-width: 0.11em;
+	transition: background-color .5s;
+	border-radius: 10px;
+}
+
+div#signup input[type=submit]:hover, div#signup button:hover {
+	background-color: #ed6423;
+}
+
+div#signup input[type=submit]:active, div#signup button:active {
+	background-color: #ed1414;
+	transition: none;
+}
+
+.columns div#info {
+	text-align: center;
+}
+
+.hidden {
+	display: none;
+}
+
+form#inputForm, form#edit-habit {
+	width: 50%;
+
+}
+
+form#edit-habit {
+
+}
+
+.inner-column {
+	width: 450px;
+	padding: 40px 30px;
+	background-color: #eee;
+	border-radius: 4px;
+	margin-top: auto;
+	position: relative;
+	right: 50px;
+  }
+
+  input:invalid + label::after{
+	  content: "test";
+  }
+
+#habits{
+	border-collapse: collapse;
+	width: 95%;
+	margin: 30px;
+}
+
+#habits td, #habits th{
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+	padding-right: 10px;
+	margin: 15px;
+}
+
+#habits th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #faa54a;
+	color: white;
+}
+
+#myTracker{
+	text-align: center;
+	color: #5978bb;
+}
+
+#addHabit{
+	background-color: rgb(110, 184, 110);
+	border: 1px solid white;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	display: inline block;
+	font-size: 20px;
+	position: absolute;
+	right:0%;
+}
+
+.deleteButton{
+	background: rgb(196, 74, 74);
+	color: #ffffff;
+	cursor: pointer;
+	font-weight: bold;
+	height: 20px;
+	padding-bottom: 2px;
+	width: 50px;
+	float: right;
+	border: 1px solid white;
+}
+
+.editButton{
+	background: rgb(217, 219, 82);
+	color: #ffffff;
+	cursor: pointer;
+	font-weight: bold;
+	height: 20px;
+	padding-bottom: 2px;
+	width: 50px;
+	float: right;
+	border: 1px solid white;
+}
+
+.doneButton{
+	background: rgb(114, 223, 119);
+	color: #ffffff;
+	cursor: pointer;
+	font-weight: bold;
+	height: 20px;
+	padding-bottom: 2px;
+	width: 50px;
+	float: right;
+	border: 1px solid white;
+}
+
+
+ #inputForm{
+	margin: auto;
+	position: relative;
+	width: 450px;
+	height: 230px;
+	text-align: center;
+	background:#bbf1b0;
+	border-radius: 20px;
+ }
+
+ #edit-habit{
+	margin: auto;
+	position: relative;
+	width: 450px;
+	height: 230px;
+	text-align: center;
+	background:#bbf1b0;
+	border-radius: 20px;
+ }
+
+ #addButton, #editButton{
+	background-color: rgb(110, 184, 110);
+	border: 1px solid white;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	display: inline block;
+	font-size: 20px;
+	width: 200px;
+	border-radius: 40px;
+ }
+
+ #inputForm input, div#signup button, #edit-habit input {
+	margin-top: 10px;
+	font-size: 1.2em;
+}
+ 
+
+ #userInputHabit userInputDesc{
+	 
+ }
+
+ input:invalid + label::after{
+	content: "*";
+	color: rgba(0,100,0,0.7);
+}
+
+#streak{
+	float:clear;
+}
