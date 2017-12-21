@@ -53,7 +53,6 @@ class HabitCatalog {
 }
 
 class Habit {
-
 	constructor(name, description, days, mood) {
 		this.name = name;
 		this.description = description;
@@ -87,7 +86,6 @@ class Habit {
 }
 
 class UI {
-
 	static showElements(habits) {
 		var ul = document.getElementById('habitList');
 
@@ -138,17 +136,7 @@ class UI {
 
 }
 
-// $(document).on("click", ".progress", function() {
-// 	var attr = $(this).attr('style');
-// 	if (typeof attr !== typeof undefined && attr !== false) {
-// 		$(this).removeAttr("style");
-// 	} else {
-// 		$(this).css("background-color", "green");
-// 	}
-// })
-
 var MainModule = (function () {
-
 	var habitCatalog = new HabitCatalog();
 	var toEdit;
 
@@ -189,6 +177,7 @@ var MainModule = (function () {
 					days.push(form.DaysOfWeek[i].value);
 				}
 			}
+      
 			habit.days = days;
 			habit.mood = form.Mood.value;
 
@@ -199,7 +188,6 @@ var MainModule = (function () {
 				"&id=" + habit.id
 			);
 			UI.showElements(habitCatalog.getHabits());
-
 		},
 
 		deleteHabit: function (id) {
