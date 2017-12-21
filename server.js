@@ -17,32 +17,30 @@ var connection = mysql.createConnection({
  
 connection.connect();
 
-// var id = 2;
-// var habits = [];
-// var h1 = {
-//     id: 0,
-//     name: "Voetballen",
-//     description: "Met je voet tegen een bal trappen",
-//     days: "Monday, Sunday",
-//     mood: "Positive"
-// };
+var id = 2;
+var habits = [];
+var h1 = {
+    id: 0,
+    name: "Voetballen",
+    description: "Met je voet tegen een bal trappen",
+    days: "Monday, Sunday",
+    mood: "Positive"
+};
 
-// var h2 = {
-//     id: 1,
-//     name: "Werken",
-//     description: "Bij de Jumbo",
-//     days: "Saturday",
-//     mood: "Positive"
-// };
+var h2 = {
+    id: 1,
+    name: "Werken",
+    description: "Bij de Jumbo",
+    days: "Saturday",
+    mood: "Positive"
+};
 
-// habits.push(h1);
-// habits.push(h2);
+habits.push(h1);
+habits.push(h2);
 
 app.get("/habits", function (req, res) {
     console.log("Displaying habits");
-    connection.query("select id, title as name, description, days, mood from habit", function(error, results){
-        res.json(results);
-    });
+    res.json(habits);
 });
 
 app.get("/addhabit", function (req, res) {
@@ -51,24 +49,17 @@ app.get("/addhabit", function (req, res) {
 
     if (query["name"] !== undefined) {
 
-        // var newObj = {
-        //     id: id++,
-        //     name: query["name"],
-        //     description: query["description"],
-        //     days: query["days"],
-        //     mood: query["mood"]
-        // };
-        var queryString = "insert into habit (id, title, description, days, mood) values (null, \"" + query["name"] + "\", \"" + query["description"] + "\", \"" + query["days"] + "\", \"" + query["mood"] + "\")";
-        console.log(queryString);
+        var newObj = {
+            id: id++,
+            name: query["name"],
+            description: query["description"],
+            days: query["days"],
+            mood: query["mood"]
+        };
 
-        connection.query(queryString, function(error, results){
-
-        })
+        habits.push(newObj);
         console.log("Added ");
-
-        connection.query("SELECT LAST_INSERT_ID()", function(error, results) {
-            res.end(results.toString());
-        })
+        res.end(newObj.id.toString());
 
     } else {
         res.status(400);
