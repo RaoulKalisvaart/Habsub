@@ -1,207 +1,214 @@
-var habitCatalog = ( function () {
-	
-	var array = [];
+class HabitCatalog {
 
-	function addHabit(habit) {
-		array.push(habit);
+	constructor() {
+		var tmpArray = [];
+
+		$.get("/habits", function (data) {
+			for (var i = 0; i < data.length; i++) {
+				var toAdd = new Habit(data[i].name, data[i].description, data[i].days.split(","), data[i].mood);
+				toAdd.id = data[i].id;
+				tmpArray.push(toAdd);
+			}
+		});
+		this.array = tmpArray;
 	}
 
-	function deleteHabit(id) {
-		array.splice(id, 1);
+	addHabit(habit) {
+		var that = this;
+		$.get(("/addhabit?name=" + habit.name + "&description=" + habit.description + "&days=" + habit.days + "&mood=" + habit.mood), function (data) {
+			habit.id = data;
+			console.log(habit.id);
+			that.array.push(habit);
+			UI.showElements(that.array);
+		});
 	}
 
-	function getHabits() {
-		return array;
+	deleteHabit(id) {
+		this.array = this.array.filter(function (el) {
+			return el.id != id;
+		});
+		UI.showElements(this.array);
+
+		$.get("/deletehabit?id=" + id);
 	}
 
-	function getHabitByID(id) {
-		return array[id];
+	getHabits() {
+		return this.array;
 	}
 
-	return {
-		addHabit: addHabit,
-		deleteHabit: deleteHabit,
-		getHabits: getHabits,
-		getHabitByID: getHabitByID
+	getHabitByID(id) {
+		return this.array[this.array.findIndex(function (e) {
+			return e.id == id;
+		})];
 	}
 
-})();
+}
 
-var Habit = ( function (name, description, days, mood) {
-	
-	var progress = []
-
-	function getName() {
-		return name;
+class Habit {
+	constructor(name, description, days, mood) {
+		this.name = name;
+		this.description = description;
+		this.days = days;
+		this.mood = mood;
+		this._progress = [];
 	}
 
-	function setName(newName) {
-		name = newName;
-	}
-
-	function getDescription() {
-		return description;
-	}
-
-	function setDescription(newDesc) {
-		description = newDesc;
-	}
-
-	function getDays() {
-		return days;
-	}
-
-	function setDays(newDays) {
-		days = newDays;
-	}
-
-	function getMood() {
-		return mood;
-	}
-
-	function setMood(newMood) {
-		mood = newMood;
-	}
-
-	function findDate(date){
-		for (var i = 0; i < progress.length; i++) {
-			if(Math.round((progress[i]-date)/(1000*24*60*60)) == 0){
+	_findDate(date) {
+		for (var i = 0; i < this._progress.length; i++) {
+			if (Math.round((this._progress[i] - date) / (1000 * 24 * 60 * 60)) == 0) {
 				return i;
 			}
 		}
 		return -1;
 	}
 
-	function markDone(date) {
-		progress.push(date);
+	markDone(date) {
+		this._progress.push(date);
 	}
 
-	function markUndone(date) {
-		var id = findDate(date);
-		progress.splice(id, 1);
+	markUndone(date) {
+		var id = this._findDate(date);
+		this._progress.splice(id, 1);
 	}
 
-	function isMarked(date) {
-		return findDate(date) != -1;
+	isMarked(date) {
+		return this._findDate(date) != -1;
 	}
 
-	return {
-		getName: getName,
-		setName: setName,
-		getDescription: getDescription,
-		setDescription: setDescription,
-		getDays: getDays,
-		setDays: setDays,
-		getMood: getMood,
-		setMood: setMood,
-		markDone: markDone,
-		markUndone: markUndone,
-		isMarked: isMarked
+}
+
+class UI {
+	static showElements(habits) {
+		var ul = document.getElementById('habitList');
+
+		while (ul.firstChild) {
+			ul.removeChild(ul.firstChild);
+		}
+
+		for (var i = 0, max = habits.length; i < max; i += 1) {
+			var il = document.createElement('li');
+			il.innerHTML = this._generateListHTML(habits, i);
+			ul.appendChild(il);
+		}
 	}
 
-});
+	static _generateListHTML(tempArray, i) {
+		var output;
 
-$(document).on("click", ".progress", function() {
-	var attr = $(this).attr('style');
-	if (typeof attr !== typeof undefined && attr !== false) {
-		$(this).removeAttr("style");
-	} else {
-		$(this).css("background-color", "green");
-	}
-})
+		output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + "; Days:";
+		for (var j = 0; j < tempArray[i].days.length; j++) {
+			output = output + tempArray[i].days[j] + " ";
+		}
+		output += "Mood: " + tempArray[i].mood + "\n";
 
-var MainModule = ( function () {
+		output += "<button onclick=\"MainModule.deleteHabit(" + tempArray[i].id + ")\">delete</button>\n";
+		output += "<button onclick=\"MainModule.setToEdit(" + tempArray[i].id + ")\">edit</button>\n";
 
-    var toEdit;
+		var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+		var day = new Date().getDay() + 1;
+		for (var j = 0; j < days.length; j++) {
+			output += "<label><input type=\"checkbox\" class=\"progress\" name=\"Check\" value=\"" + tempArray[i].id + " " + (6 - j) + "\" ";
 
-	return {
-        addElement: function(form){
+			var date = new Date();
+			date.setDate(date.getDate() - (6 - j));
 
-            var userInput = document.getElementById('userInputHabit').value
-            var userDescription = document.getElementById('userInputDesc').value;
-
-            temp = []
-			for (var i = 0; i < form.DaysOfWeek.length; i++) {
-				if(form.DaysOfWeek[i].checked === true){
-					temp.push(form.DaysOfWeek[i].value);
-				}
-            }
-            
-            var newMood = form.Mood.value;
-            
-            var newHabit = new Habit(userInput, userDescription, temp, newMood);
-
-            habitCatalog.addHabit(newHabit);
-            MainModule.showElements();
-        },
-    
-        showElements: function(){
-            var tempArray = habitCatalog.getHabits();
-            var ul = document.getElementById('habitList');
-
-            while (ul.firstChild) {
-				ul.removeChild(ul.firstChild);
+			if (tempArray[i].isMarked(date)) {
+				output += "checked"
 			}
 
-            for(var i = 0, max = tempArray.length; i < max; i += 1){
-                var output;
-                output = "Habit: " + tempArray[i].getName() + "; Description: " + tempArray[i].getDescription() + "; Days:";
-                for(var j = 0; j < tempArray[i].getDays().length; j++)
-                {
-                    output = output + tempArray[i].getDays()[j] + " ";
-                }
-                output += "Mood: " + tempArray[i].getMood() +"\n";
-                output += "<button onclick=\"MainModule.deleteHabit(" + i + ")\">delete</button>\n";
-                output += "<button onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
+			output += ">" + days[day] + "</label>";
+			day++;
+			if (day == 7) {
+				day = 0
+			}
+		}
 
-                var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-                var day = new Date().getDay() + 1;
-                for (var j = 0; j < days.length; j++) {
-                	output += "<label><input type=\"checkbox\" class=\"progress\" name=\"Check\" value=\"" + i + " " + (6-j) + "\" ";
+		return output;
+	}
 
-                	var date = new Date();
-					date.setDate(date.getDate() - (6-j));
+}
 
-                	if(tempArray[i].isMarked(date)) {
-                		output += "checked"
-                	}
+var MainModule = (function () {
+	var habitCatalog = new HabitCatalog();
+	var toEdit;
 
-                	output += ">" + days[day] + "</label>";
-                	day++;
-                	if(day == 7) { day = 0 }
-                }
+	return {
+		addElement: function (form) {
 
-                var il = document.createElement('li');
-                il.innerHTML = output;
-                ul.appendChild(il);
-            }
-        },
+			var userInput = document.getElementById('userInputHabit').value
+			var userDescription = document.getElementById('userInputDesc').value;
 
-        editHabit: function (form) {
+			temp = []
+			for (var i = 0; i < form.DaysOfWeek.length; i++) {
+				if (form.DaysOfWeek[i].checked === true) {
+					temp.push(form.DaysOfWeek[i].value);
+				}
+			}
 
-        	var habit = habitCatalog.getHabitByID(toEdit);
+			var newMood = form.Mood.value;
 
-			if(form.Name.value !== "") { habit.setName(form.Name.value); }
-			if(form.Description.value !== "") { habit.setDescription(form.Description.value); }
+			var newHabit = new Habit(userInput, userDescription, temp, newMood);
+
+			habitCatalog.addHabit(newHabit);
+		},
+
+		editHabit: function (form) {
+
+			var habit = habitCatalog.getHabitByID(toEdit);
+
+			if (form.Name.value !== "") {
+				habit.name = form.Name.value;
+			}
+			if (form.Description.value !== "") {
+				habit.description = form.Description.value;
+			}
 
 			days = []
 			for (var i = 0; i < form.DaysOfWeek.length; i++) {
-				if(form.DaysOfWeek[i].checked === true){
+				if (form.DaysOfWeek[i].checked === true) {
 					days.push(form.DaysOfWeek[i].value);
 				}
 			}
-            habit.setDays(days);
-            habit.setMood(form.Mood.value);
-			MainModule.showElements();
-			
+      
+			habit.days = days;
+			habit.mood = form.Mood.value;
+
+			$.get("/edithabit?name=" + habit.name +
+				"&description=" + habit.description +
+				"&days=" + habit.days +
+				"&mood=" + habit.mood +
+				"&id=" + habit.id
+			);
+			UI.showElements(habitCatalog.getHabits());
 		},
 
-        deleteHabit: function (id) {
+		deleteHabit: function (id) {
 			habitCatalog.deleteHabit(id);
-			MainModule.showElements();
 		},
 
 		setToEdit: function (id) {
+			var editForm = document.getElementById("edit-habit");
+			var editHabit = habitCatalog.getHabitByID(id);
+
+			editForm.elements["Name"].value = editHabit.name;
+			editForm.elements["Description"].value = editHabit.description;
+
+			var checkboxes = editForm.elements["DaysOfWeek"];
+			for (i = 0; i < checkboxes.length; i++) {
+				if (editHabit.days.indexOf(checkboxes[i].value) !== -1) {
+					checkboxes[i].checked = true;
+				} else {
+					checkboxes[i].checked = false;
+				}
+			}
+
+			var moods = editForm.elements["Mood"];
+			if (editHabit.mood == "Positive") {
+				moods[0].checked = true;
+			} else {
+				moods[1].checked = true;
+			}
+
 			toEdit = id;
 		},
 
@@ -213,19 +220,24 @@ var MainModule = ( function () {
 			var date = new Date();
 			date.setDate(date.getDate() - values[1]);
 
-			if(e.is(":checked")) {
+			if (e.is(":checked")) {
 				habit.markDone(date);
 			} else {
 				habit.markUndone(date);
 			}
 
+		},
+
+		initialShow: function () {
+			UI.showElements(habitCatalog.getHabits());
 		}
 	}
 
 })();
 
-$(document).ready(function(){
-    $(document).on('change', 'input.progress', function() {
-    	MainModule.changeProgress($(this))
-    });
+$(document).ready(function () {
+	MainModule.initialShow();
+	$(document).on('change', 'input.progress', function () {
+		MainModule.changeProgress($(this))
+	});
 });
