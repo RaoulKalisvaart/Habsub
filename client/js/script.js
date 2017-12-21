@@ -1,7 +1,7 @@
 class HabitCatalog {
 
 	constructor() {
-		this.fetchHabits();
+		this.array = [];
 	}
 
 	fetchHabits(callback) {
@@ -10,6 +10,7 @@ class HabitCatalog {
 		var that = this;
 
 		$.get("/habits", function (data) {
+			console.log(data);
 			for (var i = 0; i < data.length; i++) {
 				var toAdd = new Habit(data[i].name, data[i].description, data[i].days.split(","), data[i].mood);
 				toAdd.id = data[i].id;
@@ -87,6 +88,8 @@ class Habit {
 
 class UI {
 	static showElements(habits) {
+		console.log(habits);
+
 		var ul = document.getElementById('habitList');
 
 		while (ul.firstChild) {
@@ -138,6 +141,7 @@ class UI {
 
 var MainModule = (function () {
 	var habitCatalog = new HabitCatalog();
+
 	var toEdit;
 
 	return {
@@ -236,11 +240,6 @@ var MainModule = (function () {
 
 		},
 
-		initialShow: function () {
-			console.log(habitCatalog.getHabits());
-			UI.showElements(habitCatalog.getHabits());
-		},
-
 		updateCatalog: function () {
 			habitCatalog.fetchHabits(function() {
 				console.log(habitCatalog.getHabits());
@@ -252,7 +251,7 @@ var MainModule = (function () {
 })();
 
 $(document).ready(function () {
-	MainModule.initialShow();
+	MainModule.updateCatalog();
 	$(document).on('change', 'input.progress', function () {
 		MainModule.changeProgress($(this))
 	});
