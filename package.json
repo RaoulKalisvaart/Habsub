@@ -1,0 +1,28 @@
+{
+  "name": "habsub",
+  "version": "1.0.0",
+  "description": "A habit tracker application",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.2",
+    "mysql": "^2.15.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RaoulKalisvaart/Habsub.git"
+  },
+  "keywords": [
+    "habit"
+  ],
+  "author": "Jasper Teunissen and Raoul Kalisvaart",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RaoulKalisvaart/Habsub/issues"
+  },
+  "homepage": "https://github.com/RaoulKalisvaart/Habsub#readme"
+}
