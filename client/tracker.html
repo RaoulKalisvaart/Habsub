@@ -1,40 +1,21 @@
-<!DOCTYPE html>
+<Doctype html>
     <html>
         <head>
             <title>Habsub: Tracker</title>
-            <link rel="stylesheet" type="text/css" href="css/style.css">
             <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script type="text/javascript" src="js/script.js"></script>
         </head>
         <body>
-            <div id="header">
-                <img id="logo" src="res/Logo.png" alt="Logo" height="100">
-                <nav>
-                    <a href="index.html">Home</a> |
-                    <a href = "tracker.html">My Tracker</a> |
-                    <a href = "FAQ.html">FAQ</a>
-                </nav>
-            </div>
-            <h2 id="myTracker">My Tracker</h2>
-            <h3 id="streak">My streak:</h3>
-            <table id="habits">
-                <tr>
-                    <th>Habit</th>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                    <th>Sunday</th>
-                </tr>
-            </table>
-            <ul id="habitList">
+            <nav align = "right">
+                <a href="index.html">Home</a> |
+                <a href = "tracker.html">My Tracker</a> |
+                <a href = "FAQ.html">FAQ</a>
+            </nav>
+            <img src = "res/Logo.png" alt = "Logo" height = "150">
+            <h2>My Tracker</h2>
+            <ul id = "habitList">
             </ul>
-            
-            <button id="addHabit">Add new habit</button>
-            <div class="addForm">
-            <form id="inputForm" class="hidden" onsubmit="return false">
+            <form id = "inputForm" onsubmit="return false">
                 <input type="text" id="userInputHabit" placeholder ="New Habit"><br>
                 <input type="text" id="userInputDesc" placeholder ="Habit Description"><br>
                 When do you want to do this habit?
@@ -49,27 +30,29 @@
                 <br>
                 <input type="radio" name="Mood" value="Positive">Positive
                 <input type="radio" name="Mood" value="Negative">Negative<br>
-                <input id="addButton" type="submit" value="Add Habit" onclick="MainModule.addElement(this.form)">
+                <input type="submit" value="Add Habit" onclick="MainModule.addElement(this.form)">
             </form>
-        </div>
-            <form id="edit-habit" class="hidden" onsubmit="return false">
-                <input type="text" name="Name" placeholder="Name of habit">
-                <br>
-                <input type="text" name="Description" placeholder="Description of habit">
-                <br>
-                When do you want to do this habit?
-                <br>
-                <label><input type="checkbox" name="DaysOfWeek" value="Monday">Monday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Tuesday">Tuesday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Wednesday">Wednesday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Thursday">Thursday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Friday">Friday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday</label>
-                <label><input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday</label>
-                <br>
-                <input type="radio" name="Mood" value="Positive">Positive
-                <input type="radio" name="Mood" value="Negative">Negative<br>
-                <input id="editButton" type="submit" value="Save changes" onclick="MainModule.editHabit(this.form)">
+            <form id="edit-habit" action="" onsubmit="return false">
+                <fieldset>
+                <legend>Edit your habit</legend>
+                    <input type="text" name="Name" placeholder="Name of habit">
+                    <br>
+                    <input type="text" name="Description" placeholder="Description of habit">
+                    <br>
+                    When do you want to do this habit?
+                    <br>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Monday">Monday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Tuesday">Tuesday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Wednesday">Wednesday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Thursday">Thursday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Friday">Friday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Saturday">Saturday</label>
+                    <label><input type="checkbox" name="DaysOfWeek" value="Sunday">Sunday</label>
+                    <br>
+                    <input type="radio" name="Mood" value="Positive">Positive
+                    <input type="radio" name="Mood" value="Negative">Negative<br>
+                    <input type="submit" value="Save changes" onclick="MainModule.editHabit(this.form)">
+                </fieldset>
             </form>
         </body>
     </html>

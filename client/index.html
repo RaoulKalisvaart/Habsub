@@ -1,48 +1,35 @@
-<!DOCTYPE html>
+<Doctype html>
 <html>
     <head>
         <title>Habsub</title>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <link href="https://fonts.googleapis.com/css?family=Nunito+Sans" rel="stylesheet">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-        <!-- <script src="http://code.jquery.com/jquery-1.11.1.js" type="text/javascript"></script> -->
         <script type="text/javascript" src="js/script.js"></script>
     </head>
     <body>
-        <div id="header">
-            <img id="logo" src="res/Logo.png" alt="Logo" height="100">
-            <nav>
-                <a href="index.html">Home</a> |
-                <a href = "tracker.html">My Tracker</a> |
-                <a href = "FAQ.html">FAQ</a>
-            </nav>
-        </div>
-        <div class="columns">
-            <div class="column" id="info">
-                <h1>Welcome</h1>
-                <p>Something about us</p>
-                <h2>Features</h2>
-                <p>Something about features</p>
-            </div>
-            <div class="column" id="signup">
-                <div class="inner-column">
-                    <h3>Sign up!</h3>
-                    <form action="singup.html">
-                        <input class = "isRequired" type="email" name="emailRequired" placeholder = "emailadress" required>
-                        <label for="deadline1"> </label>
-                        <br>
-                        <input type="text" name="Username" placeholder="Username" required/>
-                        <label for="deadline1"> </label>
-                        <br>
-                        <input type="text" name="Password" placeholder="Password" required/>
-                        <label for="deadline1"> </label>
-                        <br><br>
-                        <input type="submit" value="Sign up">
-                    </form>
-                    <p id="or"><span>or</span></p>
-                    <Button>login</Button>
-                </div>
-            </div>
-        </div>
+        <nav align = "right">
+            <a href="index.html">Home</a> |
+            <a href = "tracker.html">My Tracker</a> |
+            <a href = "FAQ.html">FAQ</a>
+        </nav>
+        <img src = "res/Logo.png" alt = "Logo" height = "150">
+        <center>
+            <h1>Welcome</h1>
+            <p>Something about us</p>
+            <h2>Features</h2>
+            <p>Something about features</p>
+            <br><br><br><br>
+            <h3>Sign up!</h3>
+            <form action="singup.html">
+                <input type ="text" name="Email" value ="Email-Adress">
+                <br>
+                <input type ="text" name="Username" value ="Username">
+                <br>
+                <input type = "text" name="Password" value = "Password">
+                <br><br>
+                <input type="submit" value="Sign up">
+            </form>
+            <p>or</p>
+            <Button>login</Button>
+        </center>
     </body>
 </html>
