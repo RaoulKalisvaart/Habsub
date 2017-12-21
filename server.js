@@ -81,24 +81,28 @@ app.get("/edithabit", function (req, res) {
 
     if (query["id"] !== undefined) {
 
-        var index = habits.findIndex(function (e) {
-            return e.id == query["id"];
-        });
+        // var index = habits.findIndex(function (e) {
+        //     return e.id == query["id"];
+        // });
 
         if (query["name"]) {
-            habits[index].name = query["name"];
+            // habits[index].name = query["name"];
+            connection.query("update habit set title = \"" + query["name"] + "\" where id = " + query["id"])
         }
 
         if (query["description"]) {
-            habits[index].description = query["description"];
+            // habits[index].description = query["description"];
+            connection.query("update habit set description = \"" + query["description"] + "\" where id = " + query["id"])
         }
 
         if (query["days"]) {
-            habits[index].days = query["days"];
+            // habits[index].days = query["days"];
+            connection.query("update habit set days = \"" + query["days"] + "\" where id = " + query["id"])
         }
 
         if (query["mood"]) {
-            habits[index].mood = query["mood"];
+            // habits[index].mood = query["mood"];
+            connection.query("update habit set mood = \"" + query["mood"] + "\" where id = " + query["id"])
         }
 
         res.end("Habit edited succesfully");
@@ -116,9 +120,7 @@ app.get("/deletehabit", function (req, res) {
 
     if (query["id"] !== undefined) {
 
-        habits = habits.filter(function (el) {
-            return el.id != query["id"];
-        });
+        connection.query("delete from habit where id = " + query["id"]);
         res.end("Habit deleted succesfully");
 
     } else {
