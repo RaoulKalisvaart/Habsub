@@ -15,10 +15,24 @@
                     <a href = "FAQ.html">FAQ</a>
                 </nav>
             </div>
-            <h2>My Tracker</h2>
+            <h2 id="myTracker">My Tracker</h2>
+            <table id="habits">
+                <tr>
+                    <th>Habit</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+            </table>
             <ul id="habitList">
             </ul>
+            
             <button id="addHabit">Add new habit</button>
+            <div class="addForm">
             <form id="inputForm" class="hidden" onsubmit="return false">
                 <input type="text" id="userInputHabit" placeholder ="New Habit"><br>
                 <input type="text" id="userInputDesc" placeholder ="Habit Description"><br>
@@ -34,8 +48,9 @@
                 <br>
                 <input type="radio" name="Mood" value="Positive">Positive
                 <input type="radio" name="Mood" value="Negative">Negative<br>
-                <input type="submit" value="Add Habit" onclick="MainModule.addElement(this.form)">
+                <input id="addButton" type="submit" value="Add Habit" onclick="MainModule.addElement(this.form)">
             </form>
+        </div>
             <form id="edit-habit" class="hidden" onsubmit="return false">
                 <input type="text" name="Name" placeholder="Name of habit">
                 <br>

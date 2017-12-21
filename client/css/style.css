@@ -29,7 +29,7 @@ body nav {
 
 .columns {
 	display: flex;
-    align-items: center;
+	align-items: center;
 }
 
 .columns .column {
@@ -83,10 +83,11 @@ div#signup h3 {
 }
 
 div#signup input[type=submit], div#signup button {
-	background-color: #edaa64;
+	background-color: #faa54a;
 	border-color: black;
 	border-width: 0.11em;
 	transition: background-color .5s;
+	border-radius: 10px;
 }
 
 div#signup input[type=submit]:hover, div#signup button:hover {
@@ -114,3 +115,113 @@ form#inputForm, form#edit-habit {
 form#edit-habit {
 
 }
+
+.inner-column {
+	width: 450px;
+	padding: 40px 30px;
+	background-color: #eee;
+	border-radius: 4px;
+	margin: auto;
+	position: relative;
+	right: 50px;
+  }
+
+  input:invalid + label::after{
+	  content: "test";
+  }
+
+#habits{
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#habits td, #habits th{
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: center;
+}
+
+#habits th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #faa54a;
+	color: white;
+}
+
+#myTracker{
+	text-align: center;
+	color: #5978bb;
+}
+
+#addHabit{
+	background-color: rgb(110, 184, 110);
+	border: 1px solid white;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	display: inline block;
+	font-size: 20px;
+	position: absolute;
+	right:0%;
+}
+
+.deleteButton{
+	background: rgb(196, 74, 74);
+	color: #ffffff;
+	cursor: pointer;
+	font-weight: bold;
+	height: 20px;
+	padding-bottom: 2px;
+	width: 50px;
+	float: right;
+	border: 1px solid white;
+}
+
+.editButton{
+	background: rgb(217, 219, 82);
+	color: #ffffff;
+	cursor: pointer;
+	font-weight: bold;
+	height: 20px;
+	padding-bottom: 2px;
+	width: 50px;
+	float: right;
+	border: 1px solid white;
+}
+
+.doneButton{
+	background: rgb(114, 223, 119);
+	color: #ffffff;
+	cursor: pointer;
+	font-weight: bold;
+	height: 20px;
+	padding-bottom: 2px;
+	width: 50px;
+	float: right;
+	border: 1px solid white;
+}
+
+
+ #inputForm {
+	margin: auto;
+	position: relative;
+	width: 450px;
+	height: 200px;
+	text-align: center;
+	background:#bbf1b0;
+	border-radius: 20px;
+ }
+
+ #addButton{
+	background-color: rgb(110, 184, 110);
+	border: 1px solid white;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	display: inline block;
+	font-size: 20px;
+	width: 200px;
+	border-radius: 40px;
+ }
+
