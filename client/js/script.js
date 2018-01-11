@@ -28,7 +28,7 @@ class HabitCatalog {
 			habit.id = data;
 			console.log(habit.id);
 			that.array.push(habit);
-			UI.showElements(that.array);
+			UI.showElements(that);
 		});
 	}
 
@@ -36,7 +36,7 @@ class HabitCatalog {
 		this.array = this.array.filter(function (el) {
 			return el.id != id;
 		});
-		UI.showElements(this.array);
+		UI.showElements(this);
 
 		$.get("/deletehabit?id=" + id);
 	}
@@ -94,51 +94,147 @@ class UI {
 	static showElements(habits) {
 		console.log(habits);
 
-		var ul = document.getElementById('habitList');
-
-		while (ul.firstChild) {
-			ul.removeChild(ul.firstChild);
-		}
-
-		for (var i = 0, max = habits.length; i < max; i += 1) {
-			var il = document.createElement('li');
-			il.innerHTML = this._generateListHTML(habits, i);
-			ul.appendChild(il);
-		}
+		this._generateListHTML(habits);
 	}
 
-	static _generateListHTML(tempArray, i) {
-		var output;
+	static _generateListHTML(habitCatalog) {
+		var tempArray = habitCatalog.getHabits();
+		var table = document.getElementById("habits");
+		var nRows = table.rows.length;
+		//for(var i = 1; i < nRows; i += 1){
+			//table.deleteRow(i);
+		//}
 
-		output = "Habit: " + tempArray[i].name + "; Description: " + tempArray[i].description + "; Days:";
-		for (var j = 0; j < tempArray[i].days.length; j++) {
-			output = output + tempArray[i].days[j] + " ";
-		}
-		output += "Mood: " + tempArray[i].mood + "\n";
-
-		output += "<button onclick=\"MainModule.deleteHabit(" + tempArray[i].id + ")\">delete</button>\n";
-		output += "<button onclick=\"MainModule.setToEdit(" + tempArray[i].id + ")\">edit</button>\n";
-
-		var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-		var day = new Date().getDay() + 1;
-		for (var j = 0; j < days.length; j++) {
-			output += "<label><input type=\"checkbox\" class=\"progress\" name=\"Check\" value=\"" + tempArray[i].id + " " + (6 - j) + "\" ";
-
-			var date = new Date();
-			date.setDate(date.getDate() - (6 - j));
-
-			if (tempArray[i].isMarked(date)) {
-				output += "checked"
-			}
-
-			output += ">" + days[day] + "</label>";
-			day++;
-			if (day == 7) {
-				day = 0
-			}
+		while(table.rows.length > 1)
+		{
+			table.deleteRow(1);
 		}
 
-		return output;
+		for(var i = 0, max = tempArray.length; i < max; i += 1){
+			
+			var row = table.insertRow(1);
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			cell2.onclick =  function () {
+				if(this.style.backgroundColor !== "lightblue"){ 
+				this.style.backgroundColor = "lightblue";
+				}
+				else{
+					this.style.backgroundColor = "white";
+				}
+			};
+			var cell3 = row.insertCell(2);
+			cell3.onclick =  function () { 
+				if(this.style.backgroundColor !== "lightblue"){ 
+					this.style.backgroundColor = "lightblue";
+				}
+				else{
+					this.style.backgroundColor = "white";
+				} 
+			}
+			var cell4 = row.insertCell(3);
+			cell4.onclick =  function () { 
+				if(this.style.backgroundColor !== "lightblue"){ 
+					this.style.backgroundColor = "lightblue";
+				}
+				else{
+					this.style.backgroundColor = "white";
+				} 
+			}
+			var cell5 = row.insertCell(4);
+			cell5.onclick =  function () { 
+				if(this.style.backgroundColor !== "lightblue"){ 
+					this.style.backgroundColor = "lightblue";
+				}
+				else{
+					this.style.backgroundColor = "white";
+				} 
+			}
+			var cell6 = row.insertCell(5);
+			cell6.onclick =  function () { 
+				if(this.style.backgroundColor !== "lightblue"){ 
+					this.style.backgroundColor = "lightblue";
+				}
+				else{
+					this.style.backgroundColor = "white";
+				} 
+			}
+			var cell7 = row.insertCell(6);
+			cell7.onclick =  function () { 
+				if(this.style.backgroundColor !== "lightblue"){ 
+					this.style.backgroundColor = "lightblue";
+				}
+				else{
+					this.style.backgroundColor = "white";
+				} 
+			}
+			var cell8 = row.insertCell(7);
+			cell8.onclick =  function () { 
+				if(this.style.backgroundColor !== "lightblue"){ 
+					this.style.backgroundColor = "lightblue";
+				}
+				else{
+					this.style.backgroundColor = "white";
+				} 
+			}
+
+			for(var j = 0; j < row.length; j++){
+				var counter = 0;
+				if(j[i].backgroundColor == "lightblue"){
+					counter++;
+					if(counter > 1){
+						j[i].style.backgroundColor = "darkblue";
+					}
+				}
+			}
+
+			var output = tempArray[i].name;
+			output += "<button class=\"deleteButton\" onclick=\"MainModule.deleteHabit(" + tempArray[i].id + ")\">delete</button>\n";
+			output += "<button class=\"editButton\" onclick=\"MainModule.setToEdit(" + tempArray[i].id + ")\">edit</button>\n";
+			cell1.innerHTML = output; 
+			if(tempArray[i].days.indexOf("Monday") !== -1){
+				var output = ""
+				output += "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				cell2.innerHTML = output;
+			}
+			if(tempArray[i].days.indexOf("Tuesday") !== -1){
+				var output = ""
+				output += "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				cell3.innerHTML = output;
+			}
+			if(tempArray[i].days.indexOf("Wednesday") !== -1){
+				var output = ""
+				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				cell4.innerHTML = output;
+			}
+			if(tempArray[i].days.indexOf("Thursday") !== -1){
+				var output = ""
+				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				cell5.innerHTML = output;
+			}
+			if(tempArray[i].days.indexOf("Friday") !== -1){
+				var output = ""
+				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				cell6.innerHTML = output;
+			}
+			if(tempArray[i].days.indexOf("Saturday") !== -1){
+				var output = ""
+				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				cell7.innerHTML = output;
+			}
+			if(tempArray[i].days.indexOf("Sunday") !== -1){
+				var output = ""
+				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				cell8.innerHTML = output;
+			}
+
+			if(tempArray[i].mood == "Positive"){
+				cell1.style.backgroundColor = "LightGreen";
+			}
+			if(tempArray[i].mood == "Negative"){
+				cell1.style.backgroundColor = "LightCoral";
+			}
+		}
 	}
 
 }
@@ -175,143 +271,7 @@ var MainModule = (function () {
         },
     
         showElements: function(){
-			var tempArray = habitCatalog.getHabits();
-			var table = document.getElementById("habits");
-			var nRows = table.rows.length;
-			//for(var i = 1; i < nRows; i += 1){
-				//table.deleteRow(i);
-			//}
-
-			while(table.rows.length > 1)
-			{
-				table.deleteRow(1);
-			}
-
-			for(var i = 0, max = tempArray.length; i < max; i += 1){
-				
-				var row = table.insertRow(1);
-				var cell1 = row.insertCell(0);
-				var cell2 = row.insertCell(1);
-				cell2.onclick =  function () {
-					if(this.style.backgroundColor !== "lightblue"){ 
-					this.style.backgroundColor = "lightblue";
-					}
-					else{
-						this.style.backgroundColor = "white";
-					}
-				};
-				var cell3 = row.insertCell(2);
-				cell3.onclick =  function () { 
-					if(this.style.backgroundColor !== "lightblue"){ 
-						this.style.backgroundColor = "lightblue";
-					}
-					else{
-						this.style.backgroundColor = "white";
-					} 
-				}
-				var cell4 = row.insertCell(3);
-				cell4.onclick =  function () { 
-					if(this.style.backgroundColor !== "lightblue"){ 
-						this.style.backgroundColor = "lightblue";
-					}
-					else{
-						this.style.backgroundColor = "white";
-					} 
-				}
-				var cell5 = row.insertCell(4);
-				cell5.onclick =  function () { 
-					if(this.style.backgroundColor !== "lightblue"){ 
-						this.style.backgroundColor = "lightblue";
-					}
-					else{
-						this.style.backgroundColor = "white";
-					} 
-				}
-				var cell6 = row.insertCell(5);
-				cell6.onclick =  function () { 
-					if(this.style.backgroundColor !== "lightblue"){ 
-						this.style.backgroundColor = "lightblue";
-					}
-					else{
-						this.style.backgroundColor = "white";
-					} 
-				}
-				var cell7 = row.insertCell(6);
-				cell7.onclick =  function () { 
-					if(this.style.backgroundColor !== "lightblue"){ 
-						this.style.backgroundColor = "lightblue";
-					}
-					else{
-						this.style.backgroundColor = "white";
-					} 
-				}
-				var cell8 = row.insertCell(7);
-				cell8.onclick =  function () { 
-					if(this.style.backgroundColor !== "lightblue"){ 
-						this.style.backgroundColor = "lightblue";
-					}
-					else{
-						this.style.backgroundColor = "white";
-					} 
-				}
-
-				for(var j = 0; j < row.length; j++){
-					var counter = 0;
-					if(j[i].backgroundColor == "lightblue"){
-						counter++;
-						if(counter > 1){
-							j[i].style.backgroundColor = "darkblue";
-						}
-					}
-				}
-
-				var output = tempArray[i].name;
-				output += "<button class=\"deleteButton\" onclick=\"MainModule.deleteHabit(" + i + ")\">delete</button>\n";
-				output += "<button class=\"editButton\" onclick=\"MainModule.setToEdit(" + i + ")\">edit</button>\n";
-				cell1.innerHTML = output; 
-				if(tempArray[i].days.indexOf("Monday") !== -1){
-					var output = ""
-					output += "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
-					cell2.innerHTML = output;
-				}
-				if(tempArray[i].days.indexOf("Tuesday") !== -1){
-					var output = ""
-					output += "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
-					cell3.innerHTML = output;
-				}
-				if(tempArray[i].days.indexOf("Wednesday") !== -1){
-					var output = ""
-					output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
-					cell4.innerHTML = output;
-				}
-				if(tempArray[i].days.indexOf("Thursday") !== -1){
-					var output = ""
-					output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
-					cell5.innerHTML = output;
-				}
-				if(tempArray[i].days.indexOf("Friday") !== -1){
-					var output = ""
-					output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
-					cell6.innerHTML = output;
-				}
-				if(tempArray[i].days.indexOf("Saturday") !== -1){
-					var output = ""
-					output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
-					cell7.innerHTML = output;
-				}
-				if(tempArray[i].days.indexOf("Sunday") !== -1){
-					var output = ""
-					output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
-					cell8.innerHTML = output;
-				}
-
-				if(tempArray[i].mood == "Positive"){
-					cell1.style.backgroundColor = "LightGreen";
-				}
-				if(tempArray[i].mood == "Negative"){
-					cell1.style.backgroundColor = "LightCoral";
-				}
-			}
+			UI.showElements(habitCatalog);
         },
 
 		editHabit: function (form) {
@@ -341,7 +301,7 @@ var MainModule = (function () {
 				"&mood=" + habit.mood +
 				"&id=" + habit.id
 			);
-			UI.showElements(habitCatalog.getHabits());
+			UI.showElements(habitCatalog);
 			
 			if (!$(form).hasClass("hidden")) {
 				$(form).addClass("hidden");
@@ -396,8 +356,8 @@ var MainModule = (function () {
 
 		updateCatalog: function () {
 			habitCatalog.fetchHabits(function() {
-				console.log(habitCatalog.getHabits());
-				UI.showElements(habitCatalog.getHabits());
+				// console.log(habitCatalog.getHabits());
+				UI.showElements(habitCatalog);
 			});
 		}
 	}
