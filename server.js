@@ -2,6 +2,7 @@ var express = require("express");
 var url = require("url");
 var http = require("http");
 var mysql = require("mysql");
+var ejs = require('ejs');
 
 var port = 3000;
 var app = express();
@@ -12,7 +13,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'Password',
-  database : 'Habits'
+  database : 'habits'
 });
  
 connection.connect();
@@ -38,10 +39,23 @@ connection.connect();
 // habits.push(h1);
 // habits.push(h2);
 
-app.get("/habits", function (req, res) {
+app.set('view engine', 'ejs');
+
+
+app.get("/tracker", function (req, res) {
     console.log("Displaying habits");
     connection.query("select id, title as name, description, days, mood from habit", function(error, results){
-        res.json(results);
+        //res.json(results);
+        res.render('tracker', {
+            data: results
+        }
+    );
+        var habits = [];
+        for(var i = 0; i < results.length; i++)
+        {
+            var name = results[i].name;
+            habits.push
+        }
     });
 });
 
@@ -218,4 +232,3 @@ app.get("/query15", function (req, res) {
         res.end(JSON.stringify(results));
     })
 })
-
