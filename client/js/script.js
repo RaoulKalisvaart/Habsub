@@ -38,7 +38,7 @@ class HabitCatalog {
 		});
 		UI.showElements(this);
 
-		$.get("/deletehabit?id=" + id);
+		$.get("/deletehabit/" + id);
 	}
 
 	getHabits() {
@@ -92,7 +92,7 @@ class Habit {
 
 class UI {
 	static showElements(habits) {
-		console.log(habits);
+		// console.log(habits);
 
 		this._generateListHTML(habits);
 	}
@@ -153,31 +153,38 @@ class UI {
 			output += "<button class=\"editButton\" onclick=\"MainModule.setToEdit(" + tempArray[i].id + ")\">edit</button>\n";
 			cell1.innerHTML = output; 
 			if(tempArray[i].days.indexOf("Monday") !== -1){
-				var output = "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ", 0)\">done!</button>\n";
+				var output = ""
+				output += "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ", 0)\">done!</button>\n";
 				cell2.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Tuesday") !== -1){
-				var output = "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = ""
+				output += "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ", 1)\">done!</button>\n";
 				cell3.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Wednesday") !== -1){
-				var output = "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = ""
+				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ", 2)\">done!</button>\n";
 				cell4.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Thursday") !== -1){
-				var output = "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = ""
+				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ", 3)\">done!</button>\n";
 				cell5.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Friday") !== -1){
-				var output = "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = ""
+				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ", 4)\">done!</button>\n";
 				cell6.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Saturday") !== -1){
-				var output = "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = ""
+				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ", 5)\">done!</button>\n";
 				cell7.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Sunday") !== -1){
-				var output = "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = ""
+				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ", 6)\">done!</button>\n";
 				cell8.innerHTML = output;
 			}
 
@@ -317,12 +324,12 @@ var MainModule = (function () {
 		initialize: function () {
 			habitCatalog.fetchHabits(function() {});
 		}
+
 	}
 
 })();
 
 $(document).ready(function(){
-	MainModule.initialize();
     $(document).on('change', 'input.progress', function() {
     	MainModule.changeProgress($(this))
     });
@@ -336,8 +343,11 @@ $(document).ready(function(){
 			$("form#inputForm").removeClass("hidden");
 		}
 	});
-	window.setInterval(function(){
-	  MainModule.updateCatalog();
-	}, 5000);
 
+	if(location.pathname == "/tracker"){
+		MainModule.initialize();
+		window.setInterval(function(){
+		  MainModule.updateCatalog();
+		}, 5000);
+	}
 });

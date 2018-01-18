@@ -256,3 +256,20 @@ form#edit-habit {
 #streak{
 	float:clear;
 }
+
+table.queryTable {
+	border-collapse: collapse;
+}
+
+th {
+	background-color: #faa54a;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+
+table.queryTable, tr, th, td {
+	border: 1px solid black;
+	padding: 0.5em;
+}
