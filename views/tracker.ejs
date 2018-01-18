@@ -4,7 +4,7 @@
             <title>Habsub: Tracker</title>
             <link rel="stylesheet" type="text/css" href="css/style.css">
             <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script type="text/javascript" src="js/script.js"></script>
+            <script type="text/javascript" src="/js/script.js"></script>
         </head>
         <body>
             <div id="header">
@@ -28,12 +28,59 @@
                     <th>Saturday</th>
                     <th>Sunday</th>
                 </tr>
-                <% data.forEach(function(data) { %>
-                    <tr>
-                    <td>
-                    <%= data.name%>
+                <%
+                var color = "if(this.style.backgroundColor !== 'lightblue'){this.style.backgroundColor = 'lightblue'}else{this.style.backgroundColor = 'white'}"
+
+                data.forEach(function(data, index) { %>
+                <tr>
+                    <td style="background-color: <% if(data.mood == "Positive") { %> LightGreen <% } else { %> LightCoral <% } %>">
+                        <%= data.name%>
+                        <button class="deleteButton" onclick="MainModule.deleteHabit(<%= data.id %>)">delete</button>
+                        <button class="editButton" onclick="MainModule.setToEdit(<%= data.id %>)">edit</button>
                     </td>
-                    </tr>
+                    <td onclick="<%= color %>">
+                        <% if(data.days.indexOf("Monday") !== -1) { %>
+                        ☝
+                        <button class="doneButton" onclick="MainModule.markDone(<%= index %>, 0)">done!</button>
+                        <% } %>
+                    </td>
+                    <td onclick="<%= color %>">
+                        <% if(data.days.indexOf("Tuesday") !== -1) { %>
+                        ☝
+                        <button class="doneButton" onclick="MainModule.markDone(<%= index %>, 1)">done!</button>
+                        <% } %>
+                    </td>
+                    <td onclick="<%= color %>">
+                        <% if(data.days.indexOf("Wednesday") !== -1) { %>
+                        ☝
+                        <button class="doneButton" onclick="MainModule.markDone(<%= index %>, 2)">done!</button>
+                        <% } %>
+                    </td>
+                    <td onclick="<%= color %>">
+                        <% if(data.days.indexOf("Thursday") !== -1) { %>
+                        ☝
+                        <button class="doneButton" onclick="MainModule.markDone(<%= index %>, 3)">done!</button>
+                        <% } %>
+                    </td>
+                    <td onclick="<%= color %>">
+                        <% if(data.days.indexOf("Friday") !== -1) { %>
+                        ☝
+                        <button class="doneButton" onclick="MainModule.markDone(<%= index %>, 4)">done!</button>
+                        <% } %>
+                    </td>
+                    <td onclick="<%= color %>">
+                        <% if(data.days.indexOf("Saturday") !== -1) { %>
+                        ☝
+                        <button class="doneButton" onclick="MainModule.markDone(<%= index %>, 5)">done!</button>
+                        <% } %>
+                    </td>
+                    <td onclick="<%= color %>">
+                        <% if(data.days.indexOf("Sunday") !== -1) { %>
+                        ☝
+                        <button class="doneButton" onclick="MainModule.markDone(<%= index %>, 6)">done!</button>
+                        <% } %>
+                    </td>
+                </tr>
                 <% })%>
             </table>
             <ul id="habitList">

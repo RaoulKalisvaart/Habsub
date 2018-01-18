@@ -111,72 +111,32 @@ class UI {
 		}
 
 		for(var i = 0, max = tempArray.length; i < max; i += 1){
+
+			var color = function () { 
+				if(this.style.backgroundColor !== "lightblue"){ 
+					this.style.backgroundColor = "lightblue";
+				}
+				else{
+					this.style.backgroundColor = "white";
+				} 
+			}
 			
 			var row = table.insertRow(1);
 			var cell1 = row.insertCell(0);
 			var cell2 = row.insertCell(1);
-			cell2.onclick =  function () {
-				if(this.style.backgroundColor !== "lightblue"){ 
-				this.style.backgroundColor = "lightblue";
-				}
-				else{
-					this.style.backgroundColor = "white";
-				}
-			};
+			cell2.onclick =  color;
 			var cell3 = row.insertCell(2);
-			cell3.onclick =  function () { 
-				if(this.style.backgroundColor !== "lightblue"){ 
-					this.style.backgroundColor = "lightblue";
-				}
-				else{
-					this.style.backgroundColor = "white";
-				} 
-			}
+			cell3.onclick =  color;
 			var cell4 = row.insertCell(3);
-			cell4.onclick =  function () { 
-				if(this.style.backgroundColor !== "lightblue"){ 
-					this.style.backgroundColor = "lightblue";
-				}
-				else{
-					this.style.backgroundColor = "white";
-				} 
-			}
+			cell4.onclick =  color;
 			var cell5 = row.insertCell(4);
-			cell5.onclick =  function () { 
-				if(this.style.backgroundColor !== "lightblue"){ 
-					this.style.backgroundColor = "lightblue";
-				}
-				else{
-					this.style.backgroundColor = "white";
-				} 
-			}
+			cell5.onclick =  color;
 			var cell6 = row.insertCell(5);
-			cell6.onclick =  function () { 
-				if(this.style.backgroundColor !== "lightblue"){ 
-					this.style.backgroundColor = "lightblue";
-				}
-				else{
-					this.style.backgroundColor = "white";
-				} 
-			}
+			cell6.onclick =  color;
 			var cell7 = row.insertCell(6);
-			cell7.onclick =  function () { 
-				if(this.style.backgroundColor !== "lightblue"){ 
-					this.style.backgroundColor = "lightblue";
-				}
-				else{
-					this.style.backgroundColor = "white";
-				} 
-			}
+			cell7.onclick =  color;
 			var cell8 = row.insertCell(7);
-			cell8.onclick =  function () { 
-				if(this.style.backgroundColor !== "lightblue"){ 
-					this.style.backgroundColor = "lightblue";
-				}
-				else{
-					this.style.backgroundColor = "white";
-				} 
-			}
+			cell8.onclick =  color;
 
 			for(var j = 0; j < row.length; j++){
 				var counter = 0;
@@ -193,38 +153,31 @@ class UI {
 			output += "<button class=\"editButton\" onclick=\"MainModule.setToEdit(" + tempArray[i].id + ")\">edit</button>\n";
 			cell1.innerHTML = output; 
 			if(tempArray[i].days.indexOf("Monday") !== -1){
-				var output = ""
-				output += "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ", 0)\">done!</button>\n";
 				cell2.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Tuesday") !== -1){
-				var output = ""
-				output += "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = "&#9757" + "<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
 				cell3.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Wednesday") !== -1){
-				var output = ""
-				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
 				cell4.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Thursday") !== -1){
-				var output = ""
-				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
 				cell5.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Friday") !== -1){
-				var output = ""
-				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
 				cell6.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Saturday") !== -1){
-				var output = ""
-				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
 				cell7.innerHTML = output;
 			}
 			if(tempArray[i].days.indexOf("Sunday") !== -1){
-				var output = ""
-				output += "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
+				var output = "&#9757" +"<button class=\"doneButton\" onclick=\"MainModule.markDone(" + i + ")\">done!</button>\n";
 				cell8.innerHTML = output;
 			}
 
@@ -359,13 +312,17 @@ var MainModule = (function () {
 				// console.log(habitCatalog.getHabits());
 				UI.showElements(habitCatalog);
 			});
+		},
+
+		initialize: function () {
+			habitCatalog.fetchHabits(function() {});
 		}
 	}
 
 })();
 
 $(document).ready(function(){
-	MainModule.updateCatalog();
+	MainModule.initialize();
     $(document).on('change', 'input.progress', function() {
     	MainModule.changeProgress($(this))
     });

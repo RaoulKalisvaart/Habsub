@@ -13,7 +13,7 @@ var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'Password',
-  database : 'habits'
+  database : 'Habits'
 });
  
 connection.connect();
@@ -41,6 +41,12 @@ connection.connect();
 
 app.set('view engine', 'ejs');
 
+app.get("/habits", function (req, res) {
+    console.log("Displaying habits");
+    connection.query("select id, title as name, description, days, mood from habit", function(error, results){
+        res.json(results);
+    });
+});
 
 app.get("/tracker", function (req, res) {
     console.log("Displaying habits");
@@ -48,14 +54,12 @@ app.get("/tracker", function (req, res) {
         //res.json(results);
         res.render('tracker', {
             data: results
-        }
-    );
-        var habits = [];
-        for(var i = 0; i < results.length; i++)
-        {
-            var name = results[i].name;
-            habits.push
-        }
+        });
+        // var habits = [];
+        // for(var i = 0; i < results.length; i++) {
+        //     var name = results[i].name;
+        //     habits.push
+        // }
     });
 });
 
