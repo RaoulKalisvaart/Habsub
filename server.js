@@ -40,14 +40,14 @@ app.set('view engine', 'ejs');
 
 app.get(/\/hab{1,2}[ie][dt]{1,2}s?$/i, function (req, res) {
     console.log("Displaying habits");
-    connection.query("select id, title as name, description, days, mood from habit", function(error, results){
+    db.fetchHabits(function(results){
         res.json(results);
     });
 });
 
 app.get(/\/tr[ea][ck]{1,2}[ea]r$/i, function (req, res) {
     console.log("Displaying habits");
-    connection.query("select id, title as name, description, days, mood from habit", function(error, results){
+    db.fetchHabits(function(results){
         //res.json(results);
         res.render('tracker', {
             data: results
